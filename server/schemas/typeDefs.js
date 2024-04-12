@@ -1,66 +1,86 @@
+//REMOVED AUTHENTICATION CODE.  REFER TO ACTIVITY 23 IN 22-STATE
+
+
 const typeDefs = `
-  type Category {
-    _id: ID
-    name: String
-  }
-
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
-
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
-
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    password: String
+    instructors: [Instructor]
   }
 
-  type Checkout {
-    session: ID
-  }
-
-  type Auth {
-    token: ID
-    user: User
-  }
-
-  input ProductInput {
+  type Course {
     _id: ID
-    purchaseQuantity: Int
-    name: String
-    image: String
-    price: Float
-    quantity: Int
+    title: String
+    schedule: String
+    price: Int
+    clients: [User]
+    instructor: Instructor
+  }
+
+  type Instructor {
+    _id: ID
+    firstName: String
+    lastName: String
+    bio: String
+    courses: [Course]
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
-    user: User
-    order(_id: ID!): Order
-    checkout(products: [ProductInput]): Checkout
+    instructors: [Instructor]
+    courses: [Course]
+    users: [User]
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    login(email: String!, password: String!): Auth
+
+   addUser(
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    instructor: [ID]  
+   ):User
+
+   addInstructor(
+    firstName: String!
+    lastName: String!
+    bio: String
+    courses: [ID]
+   ):Instructor
+
+   addCourse(
+    title: String!
+    schedule: String
+    price: Int
+    instructor: ID
+    students: [ID]
+   ):Course
+   
+   updateUser(
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    instructor: [ID]  
+   ):User
+
+   updateInstructor(
+    firstName: String
+    lastName: String
+    bio: String
+    courses: [ID]
+   ):Instructor
+
+   updateCourse(
+    title: String
+    schedule: String
+    price: Int
+    instructor: ID
+    students: [ID]
+   ):Course
   }
 `;
 
