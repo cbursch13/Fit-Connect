@@ -24,6 +24,21 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
+            <Link to="/">
+              Home
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/about">
+              About
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/trainers">
+              Trainers
+            </Link>
+          </li>
+          <li className="mx-1">
             <Link to="/signup">
               Signup
             </Link>
@@ -33,19 +48,21 @@ function Nav() {
               Login
             </Link>
           </li>
+          
         </ul>
       );
     }
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
+    <header className="header">
+      <div className="logo-container">
+        <h1 className="logo">
+          <Link to="/">
+            <img src="../../FullLogo_Transparent.png" alt="FitConnect Logo" style={{ height: '80px' }} />
+          </Link>
+        </h1>
+      </div>
 
       <nav>
         {showNavigation()}
