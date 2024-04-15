@@ -1,9 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background: url(../../client/public/FitnessBackground.jpg) no-repeat center center fixed;
+  background: url(../../GymBackground.png) no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -34,6 +34,33 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+.header {
+  position: fixed;
+  height:120px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(226, 220, 212);
+  padding: 10px 20px; /* Adjust padding as needed */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  height: 100%; /* Ensure the logo container takes full height of the header */
+  display: flex;
+  align-items: center; /* Center the logo vertically */
+}
+
+.logo {
+  margin: 0; /* Remove any default margin */
+}
+
+nav {
+  display: flex;
 }
 
 .footer {

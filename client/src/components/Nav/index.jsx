@@ -55,13 +55,14 @@ function Nav() {
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
+    <header className="header">
+      <div className="logo-container">
+        <h1 className="logo">
+          <Link to="/">
+            <img src="../../FullLogo_Transparent.png" alt="FitConnect Logo" style={{ height: '80px' }} />
+          </Link>
+        </h1>
+      </div>
 
       <nav>
         {showNavigation()}
