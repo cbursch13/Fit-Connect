@@ -14,6 +14,9 @@ const instructorSchema = new Schema({
         required: true,
         trim: true
       },
+      image: {
+        type: String,
+      },
       bio: {
         type: String
       },
@@ -22,7 +25,11 @@ const instructorSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'course'
         }
-      ]
+      ],
+      clients: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+      }]
 });
 
 const Instructor = mongoose.model('instructor', instructorSchema);

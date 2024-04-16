@@ -30,7 +30,13 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'instructor'
     }
-  ]
+  ],
+  courses: [
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'course'
+    }
+  ],
 });
 
 // set up pre-save middleware to create password

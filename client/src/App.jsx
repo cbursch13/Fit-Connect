@@ -8,6 +8,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Nav from './components/Nav';
+import Cart from './components/Cart'
 import Footer from './components/Footer';
 import { StoreProvider } from './utils/GlobalState';
 
@@ -37,6 +38,7 @@ function App() {
         <StoreProvider>
           <Nav />
           <Outlet />
+          <Cart />
         </StoreProvider>
       </div>
       <Footer />
