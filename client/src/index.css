@@ -13,6 +13,11 @@
   box-sizing: border-box;
 }
 
+.black {
+  color: black;
+  margin-top: 300px;
+}
+
 html,
 body {
   height: 100%;
