@@ -9,6 +9,7 @@ const typeDefs = `
     email: String
     password: String
     instructors: [Instructor]
+    courses: [Course]
   }
 
   type Course {
@@ -16,16 +17,19 @@ const typeDefs = `
     title: String
     schedule: String
     price: Int
-    clients: [User]
+    description: String
     instructor: Instructor
+    clients: [User]
   }
 
   type Instructor {
     _id: ID
     firstName: String
     lastName: String
+    image: String
     bio: String
     courses: [Course]
+    clients: [User]
   }
 
   type Query {
@@ -41,45 +45,50 @@ const typeDefs = `
     lastName: String!
     email: String!
     password: String!
-    instructor: [ID]  
+    instructors: [ID]
+    courses: [ID]  
    ):User
 
    addInstructor(
     firstName: String!
     lastName: String!
+    image: String
     bio: String
     courses: [ID]
+    clients: [ID]
    ):Instructor
 
    addCourse(
     title: String!
     schedule: String
     price: Int
-    instructor: ID
-    students: [ID]
+    description: String
+    instructor: [ID]
+    clients: [ID]
    ):Course
    
    updateUser(
+    id: ID
     firstName: String
     lastName: String
     email: String
-    password: String
-    instructor: [ID]  
+    password: String 
    ):User
 
    updateInstructor(
+    id: ID
     firstName: String
     lastName: String
+    image: String
     bio: String
-    courses: [ID]
    ):Instructor
 
    updateCourse(
+    id: ID
     title: String
     schedule: String
     price: Int
-    instructor: ID
-    students: [ID]
+    description: String
    ):Course
   }
 `;

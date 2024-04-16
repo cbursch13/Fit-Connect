@@ -15,11 +15,15 @@ const courseSchema = new Schema({
       price: {
         type: Number,
       },
+      description: {
+        type: String,
+        required: true       
+      },
       instructor: {     //single instructor
         type: Schema.Types.ObjectId,
         ref: 'instructor'
       },
-      students: [{
+      clients: [{
         type: Schema.Types.ObjectId,
         ref: 'user'
       }]
