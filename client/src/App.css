@@ -5,12 +5,31 @@
   text-align: center;
   background: url(../../Weights.jpg) no-repeat center center fixed;
   background-size: cover;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+#home-logo {
+  max-height: 600px;
+  width: 600px;
+}
+
+.home-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home-container h4 {
+ position: relative;
+ top: -40px;
 }
 
 .header {
