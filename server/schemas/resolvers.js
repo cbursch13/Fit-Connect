@@ -5,10 +5,10 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
   Query: {
     instructors: async () => {
-      return await Instructor.find().populate('course');
+      return await Instructor.find().populate('courses');
     },
     courses: async () => {
-      return await Course.find().populate('user').populate('instructor')
+      return await Course.find().populate('clients').populate('instructor')
     },  
     users: async () => {
       return await User.find()
@@ -84,22 +84,22 @@ const resolvers = {
     addCourse: async (parent, args) => {
       return await Course.create(args);
     },
-    updateUser: async(parent, {id}) => {
-      return await User.findOneAndUpdate(
-        {_id: id},
-        {new: true}
+    updateUser: async(parent, args, context) => {
+      console.log(args.id, args.firstName)
+      return await User.findOneAndUpdate({_id: args.id},
+        args,
+        {new: true,}
       )
     },
-    updateInstructor: async (parent, {id}) => {
+    updateInstructor: async (parent, args) => {
       return await User.findOneAndUpdate(
-        {_id: id},
-        {new: true}
+        args
       )
     },
-    updateCourse: async (parent, {id}) => {
+    updateCourse: async (parent, args, context) => {
+      console.log(args);
       return await User.findOneAndUpdate(
-        {_id: id},
-        {new: true}
+        args
       )
     },
     // OLD CODE
