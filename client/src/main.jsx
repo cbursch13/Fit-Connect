@@ -5,7 +5,6 @@ import './index.css';
 import App from './App.jsx';
 import Home from './pages/Home';
 import About from './pages/About';
-import Trainers from './pages/Trainers.jsx'
 import TrainerClasses from './pages/TrainerClasses.jsx';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
