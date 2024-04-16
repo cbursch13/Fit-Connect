@@ -1,9 +1,9 @@
 :root {
-  --primary: #232F3E;
-  --secondary: #F3A847;
-  --tertiary: #B12704;
-  --light: #fafafa;
-  --dark: #272f32;
+  --primary: lightgrey;
+  --secondary: white;
+  --tertiary: lightblue;
+  --light: black;
+  --dark: white;
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(1rem);
@@ -13,9 +13,16 @@
   box-sizing: border-box;
 }
 
+.page-title {
+  color: black;
+  margin-top: 300px;
+}
+
 html,
 body {
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
