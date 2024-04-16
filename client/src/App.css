@@ -3,31 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background: url(../../GymBackground.png) no-repeat center center fixed;
+  background: url(../../Weights.jpg) no-repeat center center fixed;
   background-size: cover;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-} 
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38,12 +15,13 @@
 
 .header {
   position: fixed;
-  height:120px;
+  height:80px;
   top: 0;
   left: 0;
   width: 100%;
   background-color: rgb(226, 220, 212);
   padding: 10px 20px; /* Adjust padding as needed */
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,6 +52,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
 .card {
