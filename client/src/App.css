@@ -20,21 +20,20 @@
   left: 0;
   width: 100%;
   background-color: rgb(226, 220, 212);
-  padding: 10px 20px; /* Adjust padding as needed */
-  
+  padding: 10px 20px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo-container {
-  height: 100%; /* Ensure the logo container takes full height of the header */
+  height: 100%; 
   display: flex;
-  align-items: center; /* Center the logo vertically */
+  align-items: center; 
 }
 
 .logo {
-  margin: 0; /* Remove any default margin */
+  margin: 0; 
 }
 
 nav {
