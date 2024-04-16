@@ -17,7 +17,7 @@ import spinner from '../assets/spinner.gif';
 function About() {
 
   return (
-    <h1 className='black'>ABOUT PAGE</h1>
+    <h1 className='page-title'>ABOUT PAGE</h1>
   );
 }
 
