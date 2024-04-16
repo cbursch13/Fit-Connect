@@ -2,7 +2,7 @@ import TrainerList from "../components/TrainerList";
 import CategoryMenu from "../components/CategoryMenu";
 import Cart from "../components/Cart";
 
-const Home = () => {
+const Trainers = () => {
   return (
     <div className="container">
       <CategoryMenu />
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Trainers;
