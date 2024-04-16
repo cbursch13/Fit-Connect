@@ -17,7 +17,7 @@ import spinner from '../assets/spinner.gif';
 function Trainers() {
 
   return (
-    <h1 className='black'>TRAINERS PAGE</h1>
+    <h1 className='page-title'>TRAINERS PAGE</h1>
   );
 }
 
