@@ -5,7 +5,6 @@ const Trainers = () => {
   return (
     <div className="container">
       <TrainerList />
-      <Cart />
     </div>
   );
 };

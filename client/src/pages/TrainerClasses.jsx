@@ -7,7 +7,6 @@ const TrainerClasses = () => {
     <div className="container">
       <TrainerById />
       <ProductList />
-      <Cart />
     </div>
   );
 };
