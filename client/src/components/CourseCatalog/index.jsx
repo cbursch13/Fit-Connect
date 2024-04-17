@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import ProductItem from '../ProductItem';
+import CourseItem from '../CourseItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
@@ -7,7 +7,7 @@ import { QUERY_ALL_COURSES,} from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useParams } from 'react-router-dom';
 
-function ProductList() {
+function CourseCatalog() {
   const [state, dispatch] = useStoreContext();
   const { loading, data } = useQuery(QUERY_ALL_COURSES);
 
@@ -20,17 +20,20 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
+  console.log(state.products);
   return (
     <div className="my-2">
       <h2>Our Classes:</h2>
       {state.products.length ? (
         <div className="flex-row">
           {state.products.map((course) => (
-            <ProductItem
+            <CourseItem
               key={course._id}
               _id={course._id}
-              name={course.title}
+              title={course.title}
               price={course.price}
+              instructor={course.instructor}
+              schedule={course.schedule}
             />
           ))}
         </div>
@@ -42,4 +45,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default CourseCatalog;

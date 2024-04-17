@@ -18,7 +18,7 @@ export default function TrainerInfo() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Josh Daniels
+            Joseph Daniels
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Joseph Daniels is a renowned trainer specializing in powerlifting and muscle building. Joseph's clients range from beginners looking to pack on muscle to seasoned powerlifters aiming to break personal records. If you're ready to take your strength and muscle gains to the next level, Joseph Daniels is the trainer for you.
