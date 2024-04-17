@@ -30,6 +30,7 @@ export const QUERY_ALL_COURSES = gql`
       description
       schedule
       price
+      _id
       instructor {
         firstName
         lastName

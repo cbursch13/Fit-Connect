@@ -4,10 +4,10 @@ import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 
 const TrainerClasses = () => {
-  const { id } = useParams();
+  const { instructorID } = useParams();
   return (
     <div className="container">
-      <TrainerById trainerId={id} />
+      <TrainerById trainerId={instructorID} />
       <ProductList />
     </div>
   );

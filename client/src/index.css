@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+.detail-container {
+  margin-top: 100px;
+}
+
 .page-title {
   color: black;
   margin-top: 300px;
