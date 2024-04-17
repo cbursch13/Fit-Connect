@@ -1,7 +1,7 @@
 :root {
-  --primary: lightgrey;
+  --primary: #d3d3d3;
   --secondary: white;
-  --tertiary: lightblue;
+  --tertiary: #add8e6;
   --light: black;
   --dark: white;
   --error: rgb(228, 46, 1);
