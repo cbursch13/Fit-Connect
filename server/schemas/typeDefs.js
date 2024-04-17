@@ -40,7 +40,7 @@ const typeDefs = `
   }
 
   type Mutation {
-
+    #Add to database
    addUser(
     firstName: String!
     lastName: String!
@@ -67,7 +67,8 @@ const typeDefs = `
     instructor: [ID]
     clients: [ID]
    ):Course
-   
+
+   #Update existing data
    updateUser(
     id: ID
     firstName: String
@@ -91,6 +92,44 @@ const typeDefs = `
     price: Int
     description: String
    ):Course
+
+   #Add and remove clients
+
+   addClientToInstructor(
+    id: ID
+    clientId: ID
+   )
+   removeClientFromInstructor(
+    id: ID
+    clientId: ID
+   )
+   addClientToCourse(
+    id: ID
+    clientId: ID
+   )
+   removeClientFromCourse(
+    id: ID
+    clientId: ID
+   )
+
+   #Add and remove courses
+
+   addCourseToInstructor(
+    id: ID
+    courseId: ID
+   )
+   removeCourseFromInstructor(
+    id: ID
+    courseId: ID
+   )
+   addCourseToClient(
+    id: ID
+    courseId: ID
+   )
+   removeCourseFromClient(
+    id: ID
+    courseId: ID
+   )
   }
 `;
 
