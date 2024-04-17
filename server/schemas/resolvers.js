@@ -8,7 +8,7 @@ const resolvers = {
       return await Instructor.find().populate('courses');
     },
     courses: async () => {
-      return await Course.find().populate('clients').populate('instructor')
+      return await Course.find().populate('clients').populate('instructor');
     },  
     users: async () => {
       return await User.find()

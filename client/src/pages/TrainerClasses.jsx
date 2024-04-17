@@ -9,7 +9,6 @@ const TrainerClasses = () => {
     <div className="container">
       <TrainerById trainerId={id} />
       <ProductList />
-      <Cart />
     </div>
   );
 };

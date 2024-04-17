@@ -12,6 +12,7 @@ import Signup from './pages/Signup';
 import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success';
 import Trainers from './pages/Trainers';
+import Courses from './pages/Courses.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,8 +41,11 @@ const router = createBrowserRouter([
         path: '/trainers',
         element: <Trainers />
       }, {
-        path: '/trainers/:id',
+        path: '/trainers/:instructorID',
         element: <TrainerClasses />
+      }, {
+        path: '/courses',
+        element: <Courses />
       }, {
         path: '/success',
         element: <Success />
