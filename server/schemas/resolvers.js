@@ -13,6 +13,15 @@ const resolvers = {
     users: async () => {
       return await User.find()
     },
+    instructorById: async (parent, { id }, context) => {
+      try {
+        const instructor = await Instructor.findById(id);
+        return instructor;
+      } catch (error) {
+        console.error("Error fetching instructor by ID:", error);
+        throw new Error("Failed to fetch instructor by ID");
+      }
+    },
     //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
     // user: async (parent, args, context) => {
     //   if (context.user) {
