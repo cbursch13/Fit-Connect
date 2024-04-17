@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
-function ProductItem(item) {
+function CourseItem(item) {
   const [state, dispatch] = useStoreContext();
 
   const {
-    image,
-    name,
+    title,
     _id,
     price,
-    quantity
+    instructor,
+    schedule
   } = item;
 
   const { cart } = state
@@ -41,8 +40,10 @@ function ProductItem(item) {
   return (
     <div className="card px-1 py-1">
       <Link to={`/courses/${_id}`}>
-        <p>{name}</p>
-      </Link>
+        <h4>{title}</h4>
+    </Link> 
+        <p>Instructor: <Link to={`/trainers/${instructor._id}`}> {instructor.firstName} {instructor.lastName} </Link></p>
+        <p>{schedule}</p>
       <div>
         <span>${price}</span>
       </div>
@@ -51,4 +52,4 @@ function ProductItem(item) {
   );
 }
 
-export default ProductItem;
+export default CourseItem;

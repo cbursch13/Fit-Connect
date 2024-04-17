@@ -1,68 +1,94 @@
+import * as React from 'react';
+import { Link } from "react-router-dom";
 import { useEffect } from 'react';
-import TrainerInfo from '../TrainerInfo';
+import { QUERY_ALL_INSTRUCTORS } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
-import spinner from '../../assets/spinner.gif';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+// import trainer01 from '../../../public/images/trainer01.png';
+// import trainer02 from '../../../public/images/trainer02.jpeg';
+// import trainer03 from '../../../public/images/trainer03.jpeg';
+// import trainer04 from '../../../public/images/trainer04.jpeg';
+// import trainer05 from '../../../public/images/trainer05.jpeg';
+// import trainer06 from '../../../public/images/trainer06.jpeg';
+import { UPDATE_INSTRUCTORS } from '../../utils/actions';
 
-function TrainerList() {
+// const instructorImages = {
+//   '661f2640b9b8e63d1948c853': trainer01,
+//   '661f2640b9b8e63d1948c854': trainer02,
+//   '661f2640b9b8e63d1948c855': trainer03,
+//   '661f2640b9b8e63d1948c856': trainer04,
+//   '661f2640b9b8e63d1948c857': trainer05,
+//   '661f2640b9b8e63d1948c858': trainer06
+// };
+
+export default function CenteredTitlebarImageList() {
+  const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);
   const [state, dispatch] = useStoreContext();
-
-  const { currentCategory } = state;
-
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
     if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products,
+        type: UPDATE_INSTRUCTORS,
+        instructors: data.instructors,
       });
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
-      });
-    } else if (!loading) {
-      idbPromise('products', 'get').then((products) => {
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          products: products,
-        });
-      });
-    }
+    } 
   }, [data, loading, dispatch]);
 
-  function filterProducts() {
-    if (!currentCategory) {
-      return state.products;
-    }
-
-    return state.products.filter(
-      (product) => product.category._id === currentCategory
-    );
-  }
+  console.log(state);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="my-2">
-      <h2>Meet Our Trainers:</h2>
-      {state.products.length ? (
-        <div className="flex-row">
-          {filterProducts().map((product) => (
-            <TrainerInfo
-              key={product._id}
-              _id={product._id}
-              image={product.image}
-              name={product.name}
-            />
-          ))}
-        </div>
-      ) : (
-        <h3>You haven't added any trainers yet!</h3>
-      )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
+    <div style={{ paddingTop: '50px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <TitlebarImageList instructors={state.instructors}/>
+      </div>
     </div>
   );
 }
 
-export default TrainerList;
+function TitlebarImageList({instructors}) {
+  console.log(instructors);
+  return (
+    <ImageList sx={{ width: '100%', maxWidth: 1000, maxHeight: 600 }}>
+      <ImageListItem key="Subheader" cols={2}>
+        <ListSubheader sx={{ fontSize: '24px', color: '#339CFF', background: '#d3d3d3' }} component="div">MEET YOUR TRAINERS:</ListSubheader>
+      </ImageListItem>
+      {instructors.map((instructor) => (
+        <ImageListItem key={instructor._id}>
+          <Link to={`/trainers/${instructor._id}`} style={{ textDecoration: 'none', display: 'block' }}>
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+              <img
+                srcSet={`images/${instructor.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`images/${instructor.image}?w=248&fit=crop&auto=format`}
+                alt={instructor.firstName}
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+            <p>{instructor.firstName}</p>
+            
+            <ImageListItemBar
+              title={instructor.firstName}
+              subtitle={instructor.lastName}
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about ${instructor.lastName}`}
+                >
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </Link>
+        </ImageListItem>
+      ))}
+    </ImageList>
+  );
+}

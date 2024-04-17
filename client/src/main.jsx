@@ -5,7 +5,6 @@ import './index.css';
 import App from './App.jsx';
 import Home from './pages/Home';
 import About from './pages/About';
-import Trainers from './pages/Trainers.jsx'
 import TrainerClasses from './pages/TrainerClasses.jsx';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
@@ -13,6 +12,8 @@ import Signup from './pages/Signup';
 import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success';
 import Trainers from './pages/Trainers';
+import Courses from './pages/Courses.jsx';
+import CourseDetail from './pages/CourseDetail.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,8 +42,15 @@ const router = createBrowserRouter([
         path: '/trainers',
         element: <Trainers />
       }, {
-        path: '/trainers/:id',
+        path: '/trainers/:instructorID',
         element: <TrainerClasses />
+      }, {
+        path: '/courses',
+        element: <Courses />
+      },
+      {
+        path: '/courses/:courseID',
+        element: <CourseDetail />
       }, {
         path: '/success',
         element: <Success />

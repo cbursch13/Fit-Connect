@@ -1,21 +1,69 @@
 import { gql } from '@apollo/client';
 
-// export const QUERY_ALL_TRAINERS = gql`
-//   {
-//     trainers {
-//       _id
-//       first_name
-//       last_name
-//       bio
-//       age
-//       gender
-//       image
-//       courses {
-//         _id
-//       }
-//     }
-//   }
-// `;
+export const QUERY_ALL_INSTRUCTORS = gql`
+  {
+    instructors {
+      _id
+      firstName
+      lastName
+      bio
+      image
+      courses {
+        title
+        price
+        schedule
+        description
+        _id
+        clients {
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_COURSES = gql`
+  {
+    courses {
+      title
+      description
+      schedule
+      price
+      _id
+      instructor {
+        firstName
+        lastName
+        image
+        bio
+        _id
+      }
+    }
+  }
+`;
+
+export const QUERY_INSTRUCTOR_BY_ID = gql`
+  query getInstructors($id: ID) {
+    instructorById(id: $id) {
+      _id
+      firstName
+      lastName
+      bio
+      image
+      courses {
+        title
+        price
+        schedule
+        description
+        _id
+        clients {
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+`;
 
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {

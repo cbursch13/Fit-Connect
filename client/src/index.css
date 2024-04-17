@@ -1,7 +1,7 @@
 :root {
-  --primary: lightgrey;
+  --primary: #d3d3d3;
   --secondary: white;
-  --tertiary: lightblue;
+  --tertiary: #add8e6;
   --light: black;
   --dark: white;
   --error: rgb(228, 46, 1);
@@ -11,6 +11,10 @@
 
 * {
   box-sizing: border-box;
+}
+
+.detail-container {
+  margin-top: 100px;
 }
 
 .page-title {
@@ -92,6 +96,12 @@ header {
 
 header a {
   color: var(--light);
+}
+
+.header ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
 }
 
 button {

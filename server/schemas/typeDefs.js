@@ -33,6 +33,7 @@ const typeDefs = `
   }
 
   type Query {
+    instructorById(id: ID): Instructor
     instructors: [Instructor]
     courses: [Course]
     users: [User]
