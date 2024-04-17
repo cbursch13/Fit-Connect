@@ -13,6 +13,7 @@ import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success';
 import Trainers from './pages/Trainers';
 import Courses from './pages/Courses.jsx';
+import CourseDetail from './pages/CourseDetail.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       }, {
         path: '/courses',
         element: <Courses />
+      },
+      {
+        path: '/courses/:courseID',
+        element: <CourseDetail />
       }, {
         path: '/success',
         element: <Success />

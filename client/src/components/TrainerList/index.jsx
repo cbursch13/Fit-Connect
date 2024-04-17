@@ -10,22 +10,22 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
-import trainer01 from '../../../public/images/trainer01.png';
-import trainer02 from '../../../public/images/trainer02.jpeg';
-import trainer03 from '../../../public/images/trainer03.jpeg';
-import trainer04 from '../../../public/images/trainer04.jpeg';
-import trainer05 from '../../../public/images/trainer05.jpeg';
-import trainer06 from '../../../public/images/trainer06.jpeg';
+// import trainer01 from '../../../public/images/trainer01.png';
+// import trainer02 from '../../../public/images/trainer02.jpeg';
+// import trainer03 from '../../../public/images/trainer03.jpeg';
+// import trainer04 from '../../../public/images/trainer04.jpeg';
+// import trainer05 from '../../../public/images/trainer05.jpeg';
+// import trainer06 from '../../../public/images/trainer06.jpeg';
 import { UPDATE_INSTRUCTORS } from '../../utils/actions';
 
-const instructorImages = {
-  '661f2640b9b8e63d1948c853': trainer01,
-  '661f2640b9b8e63d1948c854': trainer02,
-  '661f2640b9b8e63d1948c855': trainer03,
-  '661f2640b9b8e63d1948c856': trainer04,
-  '661f2640b9b8e63d1948c857': trainer05,
-  '661f2640b9b8e63d1948c858': trainer06
-};
+// const instructorImages = {
+//   '661f2640b9b8e63d1948c853': trainer01,
+//   '661f2640b9b8e63d1948c854': trainer02,
+//   '661f2640b9b8e63d1948c855': trainer03,
+//   '661f2640b9b8e63d1948c856': trainer04,
+//   '661f2640b9b8e63d1948c857': trainer05,
+//   '661f2640b9b8e63d1948c858': trainer06
+// };
 
 export default function CenteredTitlebarImageList() {
   const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);
@@ -65,13 +65,15 @@ function TitlebarImageList({instructors}) {
           <Link to={`/trainers/${instructor._id}`} style={{ textDecoration: 'none', display: 'block' }}>
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
               <img
-                srcSet={`${instructorImages[instructor._id]}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${instructorImages[instructor._id]}?w=248&fit=crop&auto=format`}
+                srcSet={`images/${instructor.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`images/${instructor.image}?w=248&fit=crop&auto=format`}
                 alt={instructor.firstName}
                 loading="lazy"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
+            <p>{instructor.firstName}</p>
+            
             <ImageListItemBar
               title={instructor.firstName}
               subtitle={instructor.lastName}
