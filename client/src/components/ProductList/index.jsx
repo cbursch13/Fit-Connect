@@ -26,14 +26,14 @@ function ProductList() {
   }, [data, loading, dispatch]);
 
   console.log(state.products);
-  // const courses = state.products.filter(course => course.instructor._id === instructorID);
-  // console.log(courses);
+  const courses = state.products.filter(course => course.instructor._id === instructorID);
+  console.log(courses);
   return (
     <div className="my-2">
       <h2>Our Classes:</h2>
-      {state.products.length ? (
+      {courses.length ? (
         <div className="flex-row">
-          {state.products.map((course) => (
+          {courses.map((course) => (
             <ProductItem
               key={course._id}
               _id={course._id}
@@ -43,7 +43,7 @@ function ProductList() {
           ))}
         </div>
       ) : (
-        <h3>You haven't added any courses yet!</h3>
+        <h3>No available courses!</h3>
       )}
       {loading ? <img src={spinner} alt="loading" /> : null}
     </div>

@@ -42,7 +42,7 @@ function CourseItem(item) {
       <Link to={`/products/${_id}`}>
         <h4>{title}</h4>
     </Link> 
-        <p>Taught by <Link to={`/trainers/${instructor._id}`}> {instructor.firstName} {instructor.lastName} </Link></p>
+        <p>Instructor: <Link to={`/trainers/${instructor._id}`}> {instructor.firstName} {instructor.lastName} </Link></p>
         <p>{schedule}</p>
       <div>
         <span>${price}</span>
