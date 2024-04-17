@@ -30,7 +30,6 @@ const instructorImages = {
 export default function CenteredTitlebarImageList() {
   const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);
   const [state, dispatch] = useStoreContext();
-  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -55,6 +54,7 @@ export default function CenteredTitlebarImageList() {
 }
 
 function TitlebarImageList({instructors}) {
+  console.log(instructors);
   return (
     <ImageList sx={{ width: '100%', maxWidth: 1000, maxHeight: 600 }}>
       <ImageListItem key="Subheader" cols={2}>
