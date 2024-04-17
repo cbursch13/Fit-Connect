@@ -11,6 +11,7 @@ export function useProductReducer(initialState) {
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useProductReducer({
     products: [],
+    instructors: [],
     cart: [],
     cartOpen: false,
     categories: [],

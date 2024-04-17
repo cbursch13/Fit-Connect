@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
 import { QUERY_ALL_INSTRUCTORS } from '../../utils/queries';
+import { useStoreContext } from '../../utils/GlobalState';
 import { useQuery } from '@apollo/client';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -14,6 +16,7 @@ import trainer03 from '../../../public/images/trainer03.jpeg';
 import trainer04 from '../../../public/images/trainer04.jpeg';
 import trainer05 from '../../../public/images/trainer05.jpeg';
 import trainer06 from '../../../public/images/trainer06.jpeg';
+import { UPDATE_INSTRUCTORS } from '../../utils/actions';
 
 const instructorImages = {
   '661f2640b9b8e63d1948c853': trainer01,
@@ -26,14 +29,26 @@ const instructorImages = {
 
 export default function CenteredTitlebarImageList() {
   const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);
+  const [state, dispatch] = useStoreContext();
+  console.log(data);
 
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_INSTRUCTORS,
+        instructors: data.instructors,
+      });
+    } 
+  }, [data, loading, dispatch]);
+
+  console.log(state);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div style={{ paddingTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <TitlebarImageList instructors={data.instructors}/>
+        <TitlebarImageList instructors={state.instructors}/>
       </div>
     </div>
   );
