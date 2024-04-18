@@ -24,6 +24,7 @@ export const reducer = (state, action) => {
         instructors: [...action.instructors],
       }   
     case ADD_TO_CART:
+      console.log(action.product)
       return {
         ...state,
         cartOpen: true,
@@ -37,6 +38,7 @@ export const reducer = (state, action) => {
       };
 
     case UPDATE_CART_QUANTITY:
+      console.log('updating cart');
       return {
         ...state,
         cartOpen: true,
