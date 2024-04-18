@@ -1,4 +1,4 @@
-const { User, Instructor, Course} = require('../models');
+const { User, Instructor, Course, Thought} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -21,6 +21,9 @@ const resolvers = {
         console.error("Error fetching instructor by ID:", error);
         throw new Error("Failed to fetch instructor by ID");
       }
+    },
+    thoughts: async () => {
+      return Thought.find().sort({ createdAt: -1 });
     },
     //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
     // user: async (parent, args, context) => {
@@ -110,6 +113,12 @@ const resolvers = {
       return await User.findOneAndUpdate(
         args
       )
+    },
+    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
+      return Thought.create({ thoughtText, thoughtAuthor });
+    },
+    removeThought: async (parent, { thoughtId }) => {
+      return Thought.findOneAndDelete({ _id: thoughtId });
     },
     // OLD CODE
     // addUser: async (parent, args) => {

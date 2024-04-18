@@ -1,10 +1,26 @@
 const db = require('./connection');
-const { User, Instructor, Course } = require('../models');
+const { User, Instructor, Course, Thought } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
   await cleanDB('Instructor', 'instructors');
   await cleanDB('User', 'users');
+  await cleanDB('Thought', 'thoughts');
+
+  const thoughts = await Thought.insertMany([
+    {
+      "thoughtText": "This is a fun class!",
+      "thoughtAuthor": "Brian Kernighan"
+    },
+    {
+      "thoughtText": "This is a dumb class!",
+      "thoughtAuthor": "Max Kanat-Alexander"
+    },
+    {
+      "thoughtText": "I'd buy this class again!",
+      "thoughtAuthor": "Stephen"
+    },
+  ]);
 
   const instructors = await Instructor.insertMany([
     {
@@ -16,7 +32,6 @@ db.once('open', async () => {
     {
       firstName: 'Stephanie',
       lastName: 'McPherson',
-      
       image: 'trainer02.jpeg',
       bio: 'Stephanie McPherson is a dynamic CrossFit specialist known for her passion for functional fitness and empowering coaching style. She works with athletes of all levels, from beginners taking their first steps into CrossFit to seasoned competitors aiming for podium finishes. If you\'re ready to embrace the CrossFit lifestyle and unlock your full potential, Stephanie McPherson is the coach you want by your side.'
     },

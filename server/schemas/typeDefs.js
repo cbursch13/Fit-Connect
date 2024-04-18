@@ -92,6 +92,23 @@ const typeDefs = `
     description: String
    ):Course
   }
+
+  type Thought {
+    _id: ID
+    thoughtText: String
+    thoughtAuthor: String
+  }
+
+  type Query {
+    thoughts: [Thought]!
+    thought(thoughtId: ID!): Thought
+  }
+
+  type Mutation {
+    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
+    removeThought(thoughtId: ID!): Thought
+  }
 `;
+
 
 module.exports = typeDefs;
