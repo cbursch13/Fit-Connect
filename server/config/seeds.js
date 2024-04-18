@@ -5,6 +5,7 @@ const cleanDB = require('./cleanDB');
 db.once('open', async () => {
   await cleanDB('Instructor', 'instructors');
   await cleanDB('User', 'users');
+  await cleanDB('Course', 'courses')
 
   const instructors = await Instructor.insertMany([
     {
@@ -48,8 +49,7 @@ db.once('open', async () => {
 
   console.log('instructors seeded');
   const instructorIds = instructors.map(instructor => instructor._id);
-  const thoughtIds = thoughts.map(thoughts => thoughts._id);
-  console.log(instructorIds);
+  // console.log(instructorIds);
 
   const courses = await Course.insertMany([
     {
@@ -78,7 +78,7 @@ db.once('open', async () => {
       clients: []
     },
   ])
-
+  console.log("courses seeded")
   instructorIds.forEach( async (id) => { // populate each instructors courses array with the courses that have their instructor id
     const instructorCourses = courses.filter(course => course.instructor.equals(id));
     const courseIds = instructorCourses.map(course => course._id);
