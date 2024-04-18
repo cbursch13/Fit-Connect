@@ -164,11 +164,19 @@ const resolvers = {
         {new: true}
       );
     },
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      return Thought.create({ thoughtText, thoughtAuthor });
+
+    // Add and remove thoughts to courses //
+    addThoughtToCourse: async (parent, {id, thoughtId}) => {
+      return await Course.findOneAndUpdate({_id: id},
+        {$push: {thoughts: {_id: thoughtId}}},
+        {new: true}
+      );
     },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
+    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
+      return await Course.findOneAndUpdate({_id: id},
+        {$pull: {thoughts: {_id: thoughtId}}},
+        {new: true}
+      );
     },
     // OLD CODE
     // addUser: async (parent, args) => {

@@ -84,7 +84,7 @@ db.once('open', async () => {
       clients: []
     },
     {
-      title: "Peronalized Program",
+      title: "Personalized Program",
       schedule: "1 hour",
       price: "150",
       description: "Offers clients the opportunity to work with the instructor to create a customized strength training program.",

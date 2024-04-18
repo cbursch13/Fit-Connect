@@ -143,8 +143,8 @@ const typeDefs = `
   }
 
   type Mutation {
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    removeThought(thoughtId: ID!): Thought
+    addThoughtToCourse(thoughtText: String!, thoughtAuthor: String!): Thought
+    removeThoughtFromCourse(thoughtId: ID!): Thought
   }
 `;
 
