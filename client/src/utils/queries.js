@@ -38,6 +38,11 @@ export const QUERY_ALL_COURSES = gql`
         bio
         _id
       }
+      thoughts {
+        _id
+        thoughtText
+        thoughtAuthor
+      }
     }
   }
 `;
@@ -140,7 +145,6 @@ export const QUERY_THOUGHTS = gql`
       _id
       thoughtText
       thoughtAuthor
-      createdAt
     }
   }
 `;

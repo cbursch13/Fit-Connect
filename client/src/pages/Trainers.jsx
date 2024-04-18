@@ -1,5 +1,4 @@
 import TrainerList from "../components/TrainerList";
-import Cart from "../components/Cart";
 
 const Trainers = () => {
   return (

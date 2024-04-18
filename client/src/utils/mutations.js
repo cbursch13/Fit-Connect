@@ -56,11 +56,14 @@ export const ADD_THOUGHT = gql`
       _id
       thoughtText
       thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
+    }
+  }
+`;
+
+export const DELETE_THOUGHT = gql`
+  mutation deleteThought($thoughtId: ID!) {
+    deleteThought(thoughtId: $thoughtId) {
+      _id
     }
   }
 `;

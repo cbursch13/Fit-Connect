@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Cart from '../components/Cart';
-import Thought from '../components/Thought';
+import ThoughtForm from '../components/Thought';
 import { useStoreContext } from '../utils/GlobalState';
 import {
   REMOVE_FROM_CART,
@@ -113,7 +113,7 @@ function CourseDetail() {
         </div>
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
-      <Thought />
+      <ThoughtForm courseId={currentCourse._id} />
       <Cart />
     </>
   );

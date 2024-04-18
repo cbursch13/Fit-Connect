@@ -11,8 +11,6 @@ function ProductList() {
   const [state, dispatch] = useStoreContext();
 
   const { instructorID } = useParams();
-  // const [currentInstructor, setCurrentInstructor] = useState(instructorID);
-  // console.log(currentInstructor);
 
   const { loading, data } = useQuery(QUERY_ALL_COURSES);
 
