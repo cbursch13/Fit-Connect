@@ -48,6 +48,7 @@ db.once('open', async () => {
 
   console.log('instructors seeded');
   const instructorIds = instructors.map(instructor => instructor._id);
+  const thoughtIds = thoughts.map(thoughts => thoughts._id);
   console.log(instructorIds);
 
   const courses = await Course.insertMany([
@@ -57,6 +58,7 @@ db.once('open', async () => {
       price: "80",
       description: "Focuses on proper form, technique, and mechanics to build strong foundation",
       instructor: instructorIds[0],
+      thoughts: thoughtIds[0],
       clients: []
     },
     {
