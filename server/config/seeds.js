@@ -68,7 +68,7 @@ db.once('open', async () => {
 
   const courses = await Course.insertMany([
     {
-      title: "Weightlifting technique",
+      title: "Weightlifting Technique",
       schedule: "1 hour",
       price: "80",
       description: "Focuses on proper form, technique, and mechanics to build strong foundation",
