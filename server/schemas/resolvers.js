@@ -84,7 +84,6 @@ const resolvers = {
     // },
   },
   Mutation: {
-    // ADD TO DATABASE
     addUser: async(parent, args) => {
       return await User.create(args)
     },
@@ -94,7 +93,6 @@ const resolvers = {
     addCourse: async (parent, args) => {
       return await Course.create(args);
     },
-    // MODIFY A DATABASE ENTRY
     updateUser: async(parent, args, context) => {
       console.log(args.id, args.firstName)
       return await User.findOneAndUpdate({_id: args.id},
@@ -103,18 +101,17 @@ const resolvers = {
       )
     },
     updateInstructor: async (parent, args) => {
-      return await User.findOneAndUpdate({_id: args.id},
-        args,
-        {new: true,}
+      return await User.findOneAndUpdate(
+        args
       )
     },
     updateCourse: async (parent, args, context) => {
       console.log(args);
-      return await User.findOneAndUpdate({_id: args.id},
-        args,
-        {new: true,}
+      return await User.findOneAndUpdate(
+        args
       )
     },
+<<<<<<< HEAD
     // ADD AND REMOVE CLIENTS
     addClientToInstructor: async (parent, {id, clientId}) => {
       return await Instructor.findOneAndUpdate({_id: id},
@@ -165,6 +162,8 @@ const resolvers = {
         {new: true}
       );
     },
+=======
+>>>>>>> 6a15c9b054622314a03323e4e92073f1c423bd86
     // OLD CODE
     // addUser: async (parent, args) => {
     //   const user = await User.create(args);

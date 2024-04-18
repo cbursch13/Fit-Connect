@@ -40,7 +40,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    #Add to database
+
    addUser(
     firstName: String!
     lastName: String!
@@ -67,8 +67,7 @@ const typeDefs = `
     instructor: [ID]
     clients: [ID]
    ):Course
-
-   #Update existing data
+   
    updateUser(
     id: ID
     firstName: String
