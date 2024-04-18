@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 const Instructor = require('./Instructor');
+const thoughtSchema = require('./Thought');
 
 const courseSchema = new Schema({
     title: {
@@ -19,16 +19,11 @@ const courseSchema = new Schema({
         type: String,
         required: true       
       },
-      instructor: {     //single instructor
+      instructor: {
         type: Schema.Types.ObjectId,
         ref: 'instructor'
       },
-      thoughts: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'thought'
-        }
-      ],
+      thoughts: [thoughtSchema],
       clients: [{
         type: Schema.Types.ObjectId,
         ref: 'user'

@@ -1,45 +1,47 @@
 const typeDefs = `
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    password: String
-    instructors: [Instructor]
-    courses: [Course]
-  }
+type User {
+  _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  instructors: [Instructor]
+  courses: [Course]
+}
 
-  type Course {
-    _id: ID
-    title: String
-    schedule: String
-    price: Int
-    description: String
-    instructor: Instructor
-    clients: [User]
-  }
+type Course {
+  _id: ID
+  title: String
+  schedule: String
+  price: Int
+  description: String
+  instructor: Instructor
+  thoughts: [Thought]
+  clients: [User]
+}
 
-  type Instructor {
-    _id: ID
-    firstName: String
-    lastName: String
-    image: String
-    bio: String
-    courses: [Course]
-    clients: [User]
-  }
+type Instructor {
+  _id: ID
+  firstName: String
+  lastName: String
+  image: String
+  bio: String
+  courses: [Course]
+  clients: [User]
+}
 
-  type Auth {
+type Auth {
     token: ID
     user: User
   }
-  
-  type Query {
-    instructorById(id: ID): Instructor
-    instructors: [Instructor]
-    courses: [Course]
-    users: [User]
-  }
+
+type Query {
+  instructorById(id: ID): Instructor
+  courseById(courseId: ID): Course
+  instructors: [Instructor]
+  courses: [Course]
+  users: [User]
+}
 
   type Mutation {
 
@@ -50,110 +52,106 @@ const typeDefs = `
     password: String!
     instructors: [ID]
     courses: [ID]  
-   ):User
+  ): User
 
-   addInstructor(
+  addInstructor(
     firstName: String!
     lastName: String!
     image: String
     bio: String
     courses: [ID]
     clients: [ID]
-   ):Instructor
+  ): Instructor
 
-   addCourse(
+  addCourse(
     title: String!
     schedule: String
     price: Int
     description: String
     instructor: [ID]
     clients: [ID]
-   ):Course
-   
-   updateUser(
+  ): Course
+  
+  updateUser(
     id: ID
     firstName: String
     lastName: String
     email: String
     password: String 
-   ):User
+  ): User
 
-   updateInstructor(
+  updateInstructor(
     id: ID
     firstName: String
     lastName: String
     image: String
     bio: String
-   ):Instructor
+  ): Instructor
 
-   updateCourse(
+  updateCourse(
     id: ID
     title: String
     schedule: String
     price: Int
     description: String
-   ):Course
+  ): Course
 
    login(
     email: String!, 
     password: String!
   ):Auth
 
-   #Add and remove clients
-
-   addClientToInstructor(
+  addClientToInstructor(
     id: ID
     clientId: ID
-   ):Instructor
-   removeClientFromInstructor(
+  ): Instructor
+
+  removeClientFromInstructor(
     id: ID
     clientId: ID
-   ):Instructor
-   addClientToCourse(
+  ): Instructor
+
+  addClientToCourse(
     id: ID
     clientId: ID
-   ):Course
-   removeClientFromCourse(
+  ): Course
+
+  removeClientFromCourse(
     id: ID
     clientId: ID
-   ):Course
+  ): Course
 
-   #Add and remove courses
+  # Add and remove courses
 
-   addCourseToInstructor(
+  addCourseToInstructor(
     id: ID
     courseId: ID
-   ):Instructor
-   removeCourseFromInstructor(
+  ): Instructor
+
+  removeCourseFromInstructor(
     id: ID
     courseId: ID
-   ):Instructor
-   addCourseToClient(
+  ): Instructor
+
+  addCourseToClient(
     id: ID
     courseId: ID
-   ):User
-   removeCourseFromClient(
+  ): User
+
+  removeCourseFromClient(
     id: ID
     courseId: ID
-   ):User
-  }
+  ): User
 
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-  }
+  addThoughtToCourse(courseId: ID!, thoughtText: String!, thoughtAuthor: String!): Course
+  removeThoughtFromCourse(courseId: ID!, thoughtId: ID!): Course
+}
 
-  type Query {
-    thoughts: [Thought]!
-    thought(thoughtId: ID!): Thought
-  }
-
-  type Mutation {
-    addThoughtToCourse(thoughtText: String!, thoughtAuthor: String!): Thought
-    removeThoughtFromCourse(thoughtId: ID!): Thought
-  }
+type Thought {
+  _id: ID
+  thoughtText: String
+  thoughtAuthor: String
+}
 `;
-
 
 module.exports = typeDefs;
