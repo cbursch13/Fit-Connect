@@ -32,7 +32,7 @@ function Signup(props) {
   };
 
   return (
-    <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+    <Container maxWidth="md" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
       <Link to="/login" style={{ color: 'white' }}>← Go to Login</Link>
 
       <Typography variant="h2" gutterBottom></Typography>
