@@ -2,6 +2,7 @@ const models = require('../models');
 const db = require('../config/connection');
 
 module.exports = async (modelName, collectionName) => {
+  console.log(modelName, " cleared");
   try {
     let modelExists = await models[modelName].db.db.listCollections({
       name: collectionName
