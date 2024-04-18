@@ -84,7 +84,6 @@ const resolvers = {
     // },
   },
   Mutation: {
-    // ADD TO DATABASE
     addUser: async(parent, args) => {
       return await User.create(args)
     },
@@ -94,7 +93,6 @@ const resolvers = {
     addCourse: async (parent, args) => {
       return await Course.create(args);
     },
-    // MODIFY A DATABASE ENTRY
     updateUser: async(parent, args, context) => {
       console.log(args.id, args.firstName)
       return await User.findOneAndUpdate({_id: args.id},
@@ -103,67 +101,15 @@ const resolvers = {
       )
     },
     updateInstructor: async (parent, args) => {
-      return await User.findOneAndUpdate({_id: args.id},
-        args,
-        {new: true,}
+      return await User.findOneAndUpdate(
+        args
       )
     },
     updateCourse: async (parent, args, context) => {
       console.log(args);
-      return await User.findOneAndUpdate({_id: args.id},
-        args,
-        {new: true,}
+      return await User.findOneAndUpdate(
+        args
       )
-    },
-    // ADD AND REMOVE CLIENTS
-    addClientToInstructor: async (parent, {id, clientId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
-      );
-    },
-    removeClientFromInstructor: async (parent, {id, clientId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
-      );
-    },
-    addClientToCourse: async (parent, {id, clientId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
-      );
-    },
-    removeClientFromCourse: async (parent, {id, clientId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
-      );
-    },
-    // ADD AND REMOVE COURSE
-    addCourseToInstructor: async (parent, {id, courseId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$push: {courses: {_id: courseId}}},
-        {new: true}
-      );
-    },
-    removeCourseFromInstructor: async (parent, {id, courseId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$pull: {courses: {_id: courseId}}},
-        {new: true}
-      );
-    },
-    addCourseToClient: async (parent, {id, clientId}) => {
-      return await User.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
-      );
-    },
-    removeCourseFromCourse: async (parent, {id, clientId}) => {
-      return await User.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
-      );
     },
     // OLD CODE
     // addUser: async (parent, args) => {
