@@ -7,20 +7,24 @@ import { Container, Typography, TextField, Button, Grid } from '@mui/material';
 
 function Signup(props) {
   const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    try {
+      const { data } = await addUser({
+        variables: {
+          email: formState.email,
+          password: formState.password,
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+        },
+      });
+      const token = data.addUser.token;
+      Auth.login(token);
+    } catch (err) {
+      console.error('Error signing up:', err);
+    }
   };
 
   const handleChange = (event) => {
@@ -35,7 +39,8 @@ function Signup(props) {
     <Container maxWidth="md" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
       <Link to="/login" style={{ color: 'white' }}>← Go to Login</Link>
 
-      <Typography variant="h2" gutterBottom></Typography>
+      <Typography variant="h2" gutterBottom>Signup</Typography>
+      {error && <Typography variant="body1" color="yellow" gutterBottom>Error: {error.message}</Typography>}
       <form onSubmit={handleFormSubmit} style={{ backgroundColor: 'inherit' }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>

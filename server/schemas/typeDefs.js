@@ -1,6 +1,3 @@
-//REMOVED AUTHENTICATION CODE.  REFER TO ACTIVITY 23 IN 22-STATE
-
-
 const typeDefs = `
   type User {
     _id: ID
@@ -32,6 +29,11 @@ const typeDefs = `
     clients: [User]
   }
 
+  type Auth {
+    token: ID
+    user: User
+  }
+  
   type Query {
     instructorById(id: ID): Instructor
     instructors: [Instructor]
@@ -91,6 +93,11 @@ const typeDefs = `
     price: Int
     description: String
    ):Course
+
+   login(
+    email: String!, 
+    password: String!
+  ):Auth
 
    #Add and remove clients
 

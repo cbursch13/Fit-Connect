@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CourseItem from '../CourseItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_COURSES,} from '../../utils/queries';
+import { QUERY_ALL_COURSES } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
-import { useParams } from 'react-router-dom';
 
 function CourseCatalog() {
   const [state, dispatch] = useStoreContext();
@@ -20,12 +19,11 @@ function CourseCatalog() {
     }
   }, [data, loading, dispatch]);
 
-  console.log(state.products);
   return (
-    <div className="my-2">
+    <div className="my-2" style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2>Our Classes:</h2>
       {state.products.length ? (
-        <div className="flex-row">
+        <div className="flex-row" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
           {state.products.map((course) => (
             <CourseItem
               key={course._id}
