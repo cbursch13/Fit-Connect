@@ -52,7 +52,7 @@ function CourseDetail() {
   }, [data, loading, dispatch, courseID]);
   
 
-  console.log(currentCourse.instructor);
+//   console.log(currentCourse.instructor);
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === courseID);
     if (itemInCart) {
@@ -91,7 +91,14 @@ function CourseDetail() {
           <h1>{currentCourse.title}</h1>
 
           <p>{currentCourse.description}</p>
-          {/* <p>Instructor: <Link to={`/trainers/${currentCourse.instructor._id}`}>  {currentCourse.instructor.firstName} {currentCourse.instructor.lastName}  </Link></p> */}
+          {currentCourse.instructor && (
+            <p>
+                Instructor:{' '}
+                <Link to={`/trainers/${currentCourse.instructor._id}`}>
+                {currentCourse.instructor.firstName} {currentCourse.instructor.lastName}
+                </Link>
+            </p>
+          )}
           <p>
             <strong>Price:</strong>${currentCourse.price}{' '}
             <button onClick={addToCart}>Add to Cart</button>
@@ -102,11 +109,6 @@ function CourseDetail() {
               Remove from Cart
             </button>
           </p>
-
-          <img
-            src={`/images/${currentCourse.image}`}
-            alt={currentCourse.name}
-          />
         </div>
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
