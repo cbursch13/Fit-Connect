@@ -31,6 +31,21 @@
  position: relative;
  top: -40px;
 }
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 4fr);
+}
+
+.column {
+  padding: 20px;
+}
 
 .header {
   position: fixed;
