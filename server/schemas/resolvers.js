@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 const { Thought } = require('../../../../../UofM-VIRT-FSF-PT-10-2023-U-LOLC-ENTG/21-MERN/01-Activities/26-Stu_Resolver-Context/Solved/server/models');
 const { User, Instructor, Course} = require('../models');
+=======
+const { User, Instructor, Course, Thought} = require('../models');
+>>>>>>> 08e4b0a5f49342403488f59988e5cc6f8db4763b
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -23,23 +27,26 @@ const resolvers = {
         throw new Error("Failed to fetch instructor by ID");
       }
     },
+    thoughts: async () => {
+      return Thought.find().sort({ createdAt: -1 });
+    },
     //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id)
-    //     .populate({
-    //       // REFACTOR FOR CURRENT CODE
-    //       path: 'orders.products',
-    //       populate: 'category',
-    //     });
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id)
+        .populate({
+          // REFACTOR FOR CURRENT CODE
+          path: 'orders.products',
+          populate: 'category',
+        });
 
-    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
-    //     return user;
-    //   }
+        return user;
+      }
 
-    //   throw AuthenticationError;
-    // },
+      throw AuthenticationError;
+    },
     // order: async (parent, { _id }, context) => {
     //   if (context.user) {
     //     const user = await User.findById(context.user._id).populate({
@@ -162,26 +169,26 @@ const resolvers = {
         {new: true}
       );
     },
-    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
-      // Delete thought from database
-      await Thought.findOneAndDelete({
-        _id: thoughtId
-      });
-      // Pull thoughtID from course
-      const course = await Course.findOneAndUpdate({_id: id},
-        {$pull: {courses: {_id: thoughtId}}},
+
+    // Add and remove thoughts to courses //
+    addThoughtToCourse: async (parent, {id, thoughtId}) => {
+      return await Course.findOneAndUpdate({_id: id},
+        {$push: {thoughts: {_id: thoughtId}}},
         {new: true}
       );
-
-      return course;
     },
-    // OLD CODE
-    // addUser: async (parent, args) => {
-    //   const user = await User.create(args);
-    //   const token = signToken(user);
+    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
+      return await Course.findOneAndUpdate({_id: id},
+        {$pull: {thoughts: {_id: thoughtId}}},
+        {new: true}
+      );
+    },
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-    //   return { token, user };
-    // },
+      return { token, user };
+    },
     // addInstructor: async (parent, { products }, context) => {
     //   if (context.user) {
     //     const order = new Order({ products });
@@ -195,38 +202,38 @@ const resolvers = {
 
     //   throw AuthenticationError;
     // },
-    // updateUser: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await User.findByIdAndUpdate(context.user._id, args, {
-    //       new: true,
-    //     });
-    //   }
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-    //   throw AuthenticationError;
-    // },
-    // updateProduct: async (parent, { _id, quantity }) => {
-    //   return await Product.findByIdAndUpdate(
-    //     {_id: id},
-    //     { new: true }
-    //   );
-    // },
-    // login: async (parent, { email, password }) => {
-    //   const user = await User.findOne({ email });
+      throw AuthenticationError;
+    },
+    updateProduct: async (parent, { _id, quantity }) => {
+      return await Product.findByIdAndUpdate(
+        {_id: id},
+        { new: true }
+      );
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
-    //   if (!user) {
-    //     throw AuthenticationError;
-    //   }
+      if (!user) {
+        throw AuthenticationError;
+      }
 
-    //   const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
-    //   if (!correctPw) {
-    //     throw AuthenticationError;
-    //   }
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
 
-    //   const token = signToken(user);
+      const token = signToken(user);
 
-    //   return { token, user };
-    // },
+      return { token, user };
+    },
   },
 };
 

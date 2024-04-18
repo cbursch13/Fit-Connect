@@ -23,6 +23,12 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'instructor'
       },
+      thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'thought'
+        }
+      ],
       clients: [{
         type: Schema.Types.ObjectId,
         ref: 'user'

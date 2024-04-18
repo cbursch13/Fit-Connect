@@ -1,6 +1,3 @@
-//REMOVED AUTHENTICATION CODE.  REFER TO ACTIVITY 23 IN 22-STATE
-
-
 const typeDefs = `
   type User {
     _id: ID
@@ -32,6 +29,11 @@ const typeDefs = `
     clients: [User]
   }
 
+  type Auth {
+    token: ID
+    user: User
+  }
+  
   type Query {
     instructorById(id: ID): Instructor
     instructors: [Instructor]
@@ -92,6 +94,11 @@ const typeDefs = `
     description: String
    ):Course
 
+   login(
+    email: String!, 
+    password: String!
+  ):Auth
+
    #Add and remove clients
 
    addClientToInstructor(
@@ -130,6 +137,23 @@ const typeDefs = `
     courseId: ID
    ):User
   }
+
+  type Thought {
+    _id: ID
+    thoughtText: String
+    thoughtAuthor: String
+  }
+
+  type Query {
+    thoughts: [Thought]!
+    thought(thoughtId: ID!): Thought
+  }
+
+  type Mutation {
+    addThoughtToCourse(thoughtText: String!, thoughtAuthor: String!): Thought
+    removeThoughtFromCourse(thoughtId: ID!): Thought
+  }
 `;
+
 
 module.exports = typeDefs;
