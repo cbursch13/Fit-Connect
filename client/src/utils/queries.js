@@ -47,6 +47,20 @@ export const QUERY_ALL_COURSES = gql`
   }
 `;
 
+export const QUERY_SINGLE_COURSE = gql`
+query CourseById($courseId: ID) {
+  courseById(courseId: $courseId) {
+    _id
+    title
+    thoughts {
+      thoughtAuthor
+      thoughtText
+      _id
+    }
+  }
+}
+`;
+
 export const QUERY_INSTRUCTOR_BY_ID = gql`
   query getInstructors($id: ID) {
     instructorById(id: $id) {
@@ -135,16 +149,6 @@ export const QUERY_USER = gql`
           image
         }
       }
-    }
-  }
-`;
-
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
     }
   }
 `;

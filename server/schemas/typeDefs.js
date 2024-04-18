@@ -19,7 +19,7 @@ type Course {
   price: Int
   description: String
   instructor: Instructor
-  thoughts: [Thought]  # Include thoughts here
+  thoughts: [Thought]
   clients: [User]
 }
 
@@ -35,11 +35,10 @@ type Instructor {
 
 type Query {
   instructorById(id: ID): Instructor
+  courseById(courseId: ID): Course
   instructors: [Instructor]
   courses: [Course]
   users: [User]
-  thoughts: [Thought]!
-  thought(thoughtId: ID!): Thought
 }
 
 type Mutation {
@@ -138,8 +137,8 @@ type Mutation {
     courseId: ID
   ): User
 
-  addThoughtToCourse(thoughtText: String!, thoughtAuthor: String!): Thought
-  removeThoughtFromCourse(thoughtId: ID!): Thought
+  addThoughtToCourse(courseId: ID!, thoughtText: String!, thoughtAuthor: String!): Course
+  removeThoughtFromCourse(courseId: ID!, thoughtId: ID!): Course
 }
 
 type Thought {

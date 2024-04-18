@@ -22,6 +22,15 @@ const resolvers = {
         throw new Error("Failed to fetch instructor by ID");
       }
     },
+    courseById: async (parent, { courseId }, context) => {
+      try {
+        const course = await Course.findById(courseId);
+        return course;
+      } catch (error) {
+        console.error("Error fetching course by ID:", error);
+        throw new Error("Failed to fetch course by ID");
+      }
+    },
     //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
     // user: async (parent, args, context) => {
     //   if (context.user) {
@@ -163,17 +172,22 @@ const resolvers = {
     },
 
     // Add and remove thoughts to courses //
-    addThoughtToCourse: async (parent, {id, thoughtId}) => {
-      return await Course.findOneAndUpdate(
-        { _id: id },
-        { $push: { thoughts: thoughtId } },
-        { new: true }
+    addThoughtToCourse: async (parent, { courseId, thoughtText, thoughtAuthor }) => {
+      return Course.findOneAndUpdate(
+        { _id: courseId },
+        {
+          $addToSet: { thoughts: { thoughtText, thoughtAuthor } },
+        },
+        {
+          new: true,
+        }
       );
     },
-    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
-      return await Course.findOneAndUpdate(
-        { _id: id },
-        { $pull: { thoughts: thoughtId } },
+
+    removeThoughtFromCourse: async (parent, { courseId, thoughtId }) => {
+      return Course.findOneAndUpdate(
+        { _id: courseId },
+        { $pull: { thoughts: { _id: thoughtId } } },
         { new: true }
       );
     },
