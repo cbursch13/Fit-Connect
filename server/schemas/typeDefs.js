@@ -98,38 +98,38 @@ const typeDefs = `
    addClientToInstructor(
     id: ID
     clientId: ID
-   )
+   ):Instructor
    removeClientFromInstructor(
     id: ID
     clientId: ID
-   )
+   ):Instructor
    addClientToCourse(
     id: ID
     clientId: ID
-   )
+   ):Course
    removeClientFromCourse(
     id: ID
     clientId: ID
-   )
+   ):Course
 
    #Add and remove courses
 
    addCourseToInstructor(
     id: ID
     courseId: ID
-   )
+   ):Instructor
    removeCourseFromInstructor(
     id: ID
     courseId: ID
-   )
+   ):Instructor
    addCourseToClient(
     id: ID
     courseId: ID
-   )
+   ):User
    removeCourseFromClient(
     id: ID
     courseId: ID
-   )
+   ):User
   }
 `;
 

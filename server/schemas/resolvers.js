@@ -159,7 +159,7 @@ const resolvers = {
         {new: true}
       );
     },
-    removeCourseFromCourse: async (parent, {id, clientId}) => {
+    removeCourseFromClient: async (parent, {id, clientId}) => {
       return await User.findOneAndUpdate({_id: id},
         {$pull: {clients: {_id: clientId}}},
         {new: true}
