@@ -111,7 +111,6 @@ const resolvers = {
         args
       )
     },
-<<<<<<< HEAD
     // ADD AND REMOVE CLIENTS
     addClientToInstructor: async (parent, {id, clientId}) => {
       return await Instructor.findOneAndUpdate({_id: id},
@@ -162,8 +161,6 @@ const resolvers = {
         {new: true}
       );
     },
-=======
->>>>>>> 6a15c9b054622314a03323e4e92073f1c423bd86
     // OLD CODE
     // addUser: async (parent, args) => {
     //   const user = await User.create(args);
