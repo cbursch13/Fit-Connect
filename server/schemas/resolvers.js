@@ -1,3 +1,4 @@
+const { Thought } = require('../../../../../UofM-VIRT-FSF-PT-10-2023-U-LOLC-ENTG/21-MERN/01-Activities/26-Stu_Resolver-Context/Solved/server/models');
 const { User, Instructor, Course} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -160,6 +161,19 @@ const resolvers = {
         {$pull: {clients: {_id: clientId}}},
         {new: true}
       );
+    },
+    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
+      // Delete thought from database
+      await Thought.findOneAndDelete({
+        _id: thoughtId
+      });
+      // Pull thoughtID from course
+      const course = await Course.findOneAndUpdate({_id: id},
+        {$pull: {courses: {_id: thoughtId}}},
+        {new: true}
+      );
+
+      return course;
     },
     // OLD CODE
     // addUser: async (parent, args) => {
