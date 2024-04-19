@@ -62,8 +62,7 @@ db.once('open', async () => {
       { thoughtText: "This is bad", thoughtAuthor: "Anonymous" }
       ],
       instructor: instructorIds[0],
-      thoughts: thoughtIds[0],
-      clients: []
+     clients: []
     },
     {
       title: "Olympic Weightlifting",
