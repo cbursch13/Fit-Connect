@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import Cart from '../components/Cart';
 import ThoughtForm from '../components/Thought';
 import { useStoreContext } from '../utils/GlobalState';
 import {
@@ -13,6 +12,7 @@ import {
 import { QUERY_ALL_COURSES } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
+import ThoughtSection from '../components/ThoughtSection';
 
 function CourseDetail() {
   const [state, dispatch] = useStoreContext();
@@ -21,25 +21,21 @@ function CourseDetail() {
   const { loading, data } = useQuery(QUERY_ALL_COURSES);
   const [currentCourse, setCurrentCourse] = useState({});
   console.log(data);
-  let instructor; 
   const { cart } = state;
+
   useEffect(() => {
-    // already in global store
-    if (data) {
-        console.log(data);
-        setCurrentCourse(data.courses.find((product) => product._id === courseID));
-        instructor = currentCourse.instructor;
-    }
     // retrieved from server
     if (data) {
+      console.log(data);
+      const course = (data.courses.find((product) => product._id === courseID));
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.courses,
       });
-
       data.courses.forEach((product) => {
         idbPromise('products', 'put', product);
       });
+      setCurrentCourse(course);
     }
     // get cache from idb
     else if (!loading) {
@@ -52,8 +48,6 @@ function CourseDetail() {
     }
   }, [data, loading, dispatch, courseID]);
   
-
-//   console.log(currentCourse.instructor);
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === courseID);
     if (itemInCart) {
@@ -83,6 +77,8 @@ function CourseDetail() {
 
     idbPromise('cart', 'delete', { ...currentCourse });
   };
+
+  console.log(currentCourse.thoughts);
   return (
     <>
       {currentCourse && cart ? (
@@ -114,7 +110,10 @@ function CourseDetail() {
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
       <ThoughtForm courseId={currentCourse._id} />
-      <Cart />
+      {/* <ThoughtSection thoughts={currentCourse.thoughts} /> */}
+      {currentCourse.thoughts && (
+            <ThoughtSection course={currentCourse} />
+          )}
     </>
   );
 }
