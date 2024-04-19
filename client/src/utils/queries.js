@@ -53,9 +53,9 @@ query CourseById($courseId: ID) {
     _id
     title
     thoughts {
+      _id
       thoughtAuthor
       thoughtText
-      _id
     }
   }
 }
