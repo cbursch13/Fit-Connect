@@ -16,6 +16,7 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
+console.log("authlink run")
 const authLink = setContext((_, { Nav }) => {
   const token = localStorage.getItem('id_token');
   return {
