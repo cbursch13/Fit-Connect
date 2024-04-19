@@ -9,7 +9,7 @@ const resolvers = {
     },
     courses: async () => {
       return await Course.find().populate('clients').populate('instructor');
-    },  
+    },
     users: async () => {
       return await User.find()
     },
@@ -31,10 +31,10 @@ const resolvers = {
         throw new Error("Failed to fetch course by ID");
       }
     },
-      user: async (parent, args, context) => {
+    user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id)
-           return user;
+        return user;
       }
 
       throw AuthenticationError;
@@ -97,11 +97,11 @@ const resolvers = {
     addCourse: async (parent, args) => {
       return await Course.create(args);
     },
-    updateUser: async(parent, args, context) => {
+    updateUser: async (parent, args, context) => {
       console.log(args.id, args.firstName)
-      return await User.findOneAndUpdate({_id: args.id},
+      return await User.findOneAndUpdate({ _id: args.id },
         args,
-        {new: true,}
+        { new: true, }
       )
     },
     updateInstructor: async (parent, args) => {
@@ -116,53 +116,53 @@ const resolvers = {
       )
     },
     // ADD AND REMOVE CLIENTS
-    addClientToInstructor: async (parent, {id, clientId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
+    addClientToInstructor: async (parent, { id, clientId }) => {
+      return await Instructor.findOneAndUpdate({ _id: id },
+        { $push: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
-    removeClientFromInstructor: async (parent, {id, clientId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
+    removeClientFromInstructor: async (parent, { id, clientId }) => {
+      return await Instructor.findOneAndUpdate({ _id: id },
+        { $pull: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
-    addClientToCourse: async (parent, {id, clientId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
+    addClientToCourse: async (parent, { id, clientId }) => {
+      return await Course.findOneAndUpdate({ _id: id },
+        { $push: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
-    removeClientFromCourse: async (parent, {id, clientId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
+    removeClientFromCourse: async (parent, { id, clientId }) => {
+      return await Course.findOneAndUpdate({ _id: id },
+        { $pull: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
     // ADD AND REMOVE COURSE
-    addCourseToInstructor: async (parent, {id, courseId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$push: {courses: {_id: courseId}}},
-        {new: true}
+    addCourseToInstructor: async (parent, { id, courseId }) => {
+      return await Instructor.findOneAndUpdate({ _id: id },
+        { $push: { courses: { _id: courseId } } },
+        { new: true }
       );
     },
-    removeCourseFromInstructor: async (parent, {id, courseId}) => {
-      return await Instructor.findOneAndUpdate({_id: id},
-        {$pull: {courses: {_id: courseId}}},
-        {new: true}
+    removeCourseFromInstructor: async (parent, { id, courseId }) => {
+      return await Instructor.findOneAndUpdate({ _id: id },
+        { $pull: { courses: { _id: courseId } } },
+        { new: true }
       );
     },
-    addCourseToClient: async (parent, {id, clientId}) => {
-      return await User.findOneAndUpdate({_id: id},
-        {$push: {clients: {_id: clientId}}},
-        {new: true}
+    addCourseToClient: async (parent, { id, clientId }) => {
+      return await User.findOneAndUpdate({ _id: id },
+        { $push: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
-    removeCourseFromClient: async (parent, {id, clientId}) => {
-      return await User.findOneAndUpdate({_id: id},
-        {$pull: {clients: {_id: clientId}}},
-        {new: true}
+    removeCourseFromClient: async (parent, { id, clientId }) => {
+      return await User.findOneAndUpdate({ _id: id },
+        { $pull: { clients: { _id: clientId } } },
+        { new: true }
       );
     },
 
@@ -170,12 +170,8 @@ const resolvers = {
     addThoughtToCourse: async (parent, { courseId, thoughtText, thoughtAuthor }) => {
       return Course.findOneAndUpdate(
         { _id: courseId },
-        {
-          $addToSet: { thoughts: { thoughtText, thoughtAuthor } },
-        },
-        {
-          new: true,
-        }
+        { $addToSet: { thoughts: { thoughtText, thoughtAuthor } }, },
+        { new: true, }
       );
     },
 
@@ -186,6 +182,20 @@ const resolvers = {
         { new: true }
       );
     },
+
+    updateThoughtInCourse: async (parent, { courseId, thoughtId, updatedThought }) => {
+      const updatedCourse = await Course.findOneAndUpdate(
+        { _id: courseId, "thoughts._id": thoughtId },
+        {
+          $set: {
+            "thoughts.$.thoughtText": updatedThought,
+          },
+        },
+        { new: true }
+      );
+      return updatedCourse;
+  },
+
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -214,7 +224,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
- 
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
