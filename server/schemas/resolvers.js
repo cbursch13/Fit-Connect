@@ -36,9 +36,9 @@ const resolvers = {
         const user = await User.findById(context.user._id)
            return user;
       }
-
-      throw AuthenticationError;
     },
+    //   throw AuthenticationError;
+    // },
     // order: async (parent, { _id }, context) => {
     //   if (context.user) {
     //     const user = await User.findById(context.user._id).populate({
@@ -232,7 +232,7 @@ const resolvers = {
 
       return { token, user };
     },
-  },
+    }
 };
 
 module.exports = resolvers;

@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <div className="home-container">
-      <img src="./../../public/FullLogo_Transparent.png" alt="" id="home-logo"/>
+      <img src="../../FullLogo_Transparent.png" alt="" id="home-logo"/>
     </div>
   );
 };
