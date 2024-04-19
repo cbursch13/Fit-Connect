@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_INSTRUCTORS } from '../../utils/queries';
-import { useStoreContext } from '../../utils/GlobalState';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,11 +7,7 @@ import Typography from '@mui/material/Typography';
 
 export default function TrainerInfo({ trainerId }) {
   const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);
-  // const [state, dispatch] = useStoreContext();
-  // console.log(state);
   
-
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
