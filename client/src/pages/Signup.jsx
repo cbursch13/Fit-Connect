@@ -21,6 +21,7 @@ function Signup(props) {
         },
       });
       const token = data.addUser.token;
+      
       Auth.login(token);
     } catch (err) {
       console.error('Error signing up:', err);
