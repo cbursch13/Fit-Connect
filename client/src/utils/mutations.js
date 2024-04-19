@@ -77,3 +77,15 @@ mutation RemoveThoughtFromCourse($courseId: ID!, $thoughtId: ID!) {
   }
 }
 `;
+
+export const UPDATE_THOUGHT = gql`
+mutation UpdateThoughtInCourse($courseId: ID!, $thoughtId: ID!, $updatedThought: String!) {
+  updateThoughtInCourse(courseId: $courseId, thoughtId: $thoughtId, updatedThought: $updatedThought) {
+    _id
+    thoughts {
+      _id
+      thoughtText
+    }
+  }
+}
+`;

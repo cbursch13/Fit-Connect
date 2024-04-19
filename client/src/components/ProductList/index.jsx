@@ -3,7 +3,7 @@ import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_COURSES,} from '../../utils/queries';
+import { QUERY_ALL_COURSES } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useParams } from 'react-router-dom';
 
@@ -42,7 +42,7 @@ function ProductList() {
     <div className="my-2">
       <h2>{headerText}</h2>
       {courses.length ? (
-        <div className="flex-row">
+        <div className="products-container">
           {courses.map((course) => (
             <ProductItem
               key={course._id}
