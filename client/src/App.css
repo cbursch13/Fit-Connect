@@ -19,15 +19,48 @@
   width: 600px;
 }
 
-.home-container h4 {
- position: relative;
- top: -40px;
+.home-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  margin: 0; 
 }
 .about-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.product-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 200px; /* Adjust width as needed */
+  background-color: black;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust as needed */
 }
 
 .grid {
