@@ -26,22 +26,22 @@ const resolvers = {
       return Thought.find().sort({ createdAt: -1 });
     },
     //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id)
-        .populate({
-          // REFACTOR FOR CURRENT CODE
-          path: 'orders.products',
-          populate: 'category',
-        });
+    // user: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id)
+    //     .populate({
+    //       // REFACTOR FOR CURRENT CODE
+    //       path: 'orders.products',
+    //       populate: 'category',
+    //     });
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw AuthenticationError;
-    },
+    //   throw AuthenticationError;
+    // },
     // order: async (parent, { _id }, context) => {
     //   if (context.user) {
     //     const user = await User.findById(context.user._id).populate({
