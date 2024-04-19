@@ -1,4 +1,4 @@
-const { User, Instructor, Course, Thought} = require('../models');
+const { User, Instructor, Course } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
