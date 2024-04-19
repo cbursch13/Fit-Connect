@@ -44,8 +44,9 @@
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  margin-inline: 5px;
   width: 200px; /* Adjust width as needed */
-  background-color: black;
+  background-color: rgb(16, 23, 26);
 }
 
 .card-link {
