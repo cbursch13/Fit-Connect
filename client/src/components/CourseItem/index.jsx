@@ -44,11 +44,11 @@ function CourseItem(item) {
         <h4>{name}</h4>
     </Link> 
         <p>Instructor: <Link to={`/trainers/${instructor._id}`}> {instructor.firstName} {instructor.lastName} </Link></p>
-        <p>{schedule}</p>
+        <p>Duration: {schedule}</p>
       <div>
-        <span>${price}</span>
+        <span>Price: ${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button style={{marginTop: "30px"}} onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

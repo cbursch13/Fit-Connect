@@ -6,6 +6,7 @@ const TrainerClasses = () => {
   const { instructorID } = useParams();
   return (
     <div className="container">
+      <h1>Comments</h1>
       <TrainerById trainerId={instructorID} />
       <ProductList />
     </div>

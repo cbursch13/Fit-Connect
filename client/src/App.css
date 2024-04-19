@@ -39,13 +39,27 @@
   align-items: center;
 }
 
+.card-container {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+}
+
+.course-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .card {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
-  width: 200px; /* Adjust width as needed */
+  margin-bottom: 100px;
+  width: 300px; 
   background-color: black;
+}
+
+.thought {
+  margin-bottom: 20px; 
 }
 
 .card-link {

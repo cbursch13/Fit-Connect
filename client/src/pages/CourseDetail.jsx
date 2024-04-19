@@ -20,14 +20,11 @@ function CourseDetail() {
 
   const { loading, data } = useQuery(QUERY_ALL_COURSES);
   const [currentCourse, setCurrentCourse] = useState({});
-  console.log(data);
   const { cart } = state;
 
   useEffect(() => {
-    // retrieved from server
     if (data) {
-      console.log(data);
-      const course = (data.courses.find((product) => product._id === courseID));
+      const course = data.courses.find((product) => product._id === courseID);
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.courses,
@@ -36,9 +33,7 @@ function CourseDetail() {
         idbPromise('products', 'put', product);
       });
       setCurrentCourse(course);
-    }
-    // get cache from idb
-    else if (!loading) {
+    } else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({
           type: UPDATE_PRODUCTS,
@@ -78,12 +73,11 @@ function CourseDetail() {
     idbPromise('cart', 'delete', { ...currentCourse });
   };
 
-  console.log(currentCourse.thoughts);
   return (
     <>
       {currentCourse && cart ? (
-        <div className="container detail-container">
-          <Link to="/courses">View All Courses</Link>
+        <div className="container detail-container card">
+          <Link to="/courses" className="back-link">View All Courses</Link>
 
           <h1>{currentCourse.title}</h1>
 
@@ -97,9 +91,10 @@ function CourseDetail() {
             </p>
           )}
           <p>
-            <strong>Price:</strong>${currentCourse.price}{' '}
-            <button onClick={addToCart}>Add to Cart</button>
+            <strong>Price:</strong> ${currentCourse.price}{' '}
+            <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
             <button
+              className="remove-from-cart"
               disabled={!cart.find((p) => p._id === currentCourse._id)}
               onClick={removeFromCart}
             >
@@ -110,10 +105,9 @@ function CourseDetail() {
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
       <ThoughtForm courseId={currentCourse._id} />
-      {/* <ThoughtSection thoughts={currentCourse.thoughts} /> */}
       {currentCourse.thoughts && (
-            <ThoughtSection course={currentCourse} />
-          )}
+        <ThoughtSection course={currentCourse} />
+      )}
     </>
   );
 }
