@@ -219,12 +219,6 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      return await Product.findByIdAndUpdate(
-        {_id: id},
-        { new: true }
-      );
-    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -242,7 +236,7 @@ const resolvers = {
 
       return { token, user };
     },
-  },
+  }
 };
 
 module.exports = resolvers;
