@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS } from '../../utils/queries';
 import './style.css';
 
-const ThoughtForm = () => {
+const ThoughtForm = ({ courseId }) => {
   const [formState, setFormState] = useState({
     thoughtText: '',
     thoughtAuthor: '',
   });
   const [characterCount, setCharacterCount] = useState(0);
   const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    refetchQueries: [QUERY_THOUGHTS, 'getThoughts'],
+    refetchQueries: ['getCourse'],
   });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      await addThought({ variables: { ...formState } });
+      await addThought({ variables: { courseId, ...formState } });
       setCharacterCount(0);
       setFormState({ thoughtText: '', thoughtAuthor: '' });
     } catch (err) {

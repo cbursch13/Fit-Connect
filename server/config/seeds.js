@@ -1,29 +1,14 @@
 const db = require('./connection');
-const { User, Instructor, Course, Thought } = require('../models');
+const { User, Instructor, Course } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
-  await cleanDB('Instructor', 'instructors');
-  await cleanDB('User', 'users');
-  await cleanDB('Course', 'courses')
-  await cleanDB('Thought', 'thoughts');
+  try {
+    await cleanDB('Instructor', 'instructors');
+    await cleanDB('User', 'users');
+    await cleanDB('Course', 'courses');
 
-  const thoughts = await Thought.insertMany([
-    {
-      "thoughtText": "This is a fun class!",
-      "thoughtAuthor": "Brian Kernighan"
-    },
-    {
-      "thoughtText": "This is a dumb class!",
-      "thoughtAuthor": "Max Kanat-Alexander"
-    },
-    {
-      "thoughtText": "I'd buy this class again!",
-      "thoughtAuthor": "Stephen"
-    },
-  ]);
-
-  const instructors = await Instructor.insertMany([
+    const instructors = await Instructor.insertMany([
     {
       firstName: 'Joseph',
       lastName: 'Daniels',
@@ -62,9 +47,9 @@ db.once('open', async () => {
     },
   ]);
 
-  console.log('instructors seeded');
+  console.log(`${instructors.length} instructors seeded`);
+
   const instructorIds = instructors.map(instructor => instructor._id);
-  // console.log(instructorIds);
 
   const courses = await Course.insertMany([
     {
@@ -72,6 +57,10 @@ db.once('open', async () => {
       schedule: "1 hour",
       price: "80",
       description: "Focuses on proper form, technique, and mechanics to build strong foundation",
+      thoughts: [
+      { thoughtText: "This is awesome", thoughtAuthor: "Anonymous" },
+      { thoughtText: "This is bad", thoughtAuthor: "Anonymous" }
+      ],
       instructor: instructorIds[0],
       thoughts: thoughtIds[0],
       clients: []
@@ -81,6 +70,7 @@ db.once('open', async () => {
       schedule: "1 hour",
       price: "100",
       description: "Specifically geared towards learning the two Olympic lifts: the snatch and the clean and jerk. ",
+      thoughts: [{ thoughtText: "This is fun", thoughtAuthor: "Anonymous" }],
       instructor: instructorIds[0],
       clients: []
     },
@@ -89,36 +79,44 @@ db.once('open', async () => {
       schedule: "1 hour",
       price: "150",
       description: "Offers clients the opportunity to work with the instructor to create a customized strength training program.",
+      thoughts: [],
       instructor: instructorIds[0],
       clients: []
     },
   ])
-  console.log("courses seeded")
-  instructorIds.forEach( async (id) => { // populate each instructors courses array with the courses that have their instructor id
+  
+  console.log(`${courses.length} courses seeded`);
+
+  for (const id of instructorIds) {
     const instructorCourses = courses.filter(course => course.instructor.equals(id));
     const courseIds = instructorCourses.map(course => course._id);
     await Instructor.findOneAndUpdate(
       { _id: id },
       { $set: { courses: courseIds } },
       { new: true }
-    )
-  });
+    );
+  }
 
-  await User.create({
-    firstName: 'Pamela',
-    lastName: 'Washington',
-    email: 'pamela@testmail.com',
-    password: 'password12345'
-  });
+  await User.insertMany([
+    {
+      firstName: 'Pamela',
+      lastName: 'Washington',
+      email: 'pamela@testmail.com',
+      password: 'password12345'
+    },
+    {
+      firstName: 'Elijah',
+      lastName: 'Holt',
+      email: 'eholt@testmail.com',
+      password: 'password12345'
+    }
+  ]);
 
-  await User.create({
-    firstName: 'Elijah',
-    lastName: 'Holt',
-    email: 'eholt@testmail.com',
-    password: 'password12345'
-  });
-
-  console.log('users seeded');
+  console.log('Users seeded');
 
   process.exit();
+} catch (error) {
+  console.error('Seed script encountered an error:', error);
+  process.exit(1);
+}
 });

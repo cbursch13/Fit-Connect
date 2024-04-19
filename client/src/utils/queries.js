@@ -38,8 +38,27 @@ export const QUERY_ALL_COURSES = gql`
         bio
         _id
       }
+      thoughts {
+        _id
+        thoughtText
+        thoughtAuthor
+      }
     }
   }
+`;
+
+export const QUERY_SINGLE_COURSE = gql`
+query CourseById($courseId: ID) {
+  courseById(courseId: $courseId) {
+    _id
+    title
+    thoughts {
+      _id
+      thoughtAuthor
+      thoughtText
+    }
+  }
+}
 `;
 
 export const QUERY_INSTRUCTOR_BY_ID = gql`
@@ -130,17 +149,6 @@ export const QUERY_USER = gql`
           image
         }
       }
-    }
-  }
-`;
-
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
     }
   }
 `;

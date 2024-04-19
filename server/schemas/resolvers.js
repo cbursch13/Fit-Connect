@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-const { Thought } = require('../../../../../UofM-VIRT-FSF-PT-10-2023-U-LOLC-ENTG/21-MERN/01-Activities/26-Stu_Resolver-Context/Solved/server/models');
-const { User, Instructor, Course} = require('../models');
-=======
 const { User, Instructor, Course, Thought} = require('../models');
->>>>>>> 08e4b0a5f49342403488f59988e5cc6f8db4763b
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -27,22 +22,19 @@ const resolvers = {
         throw new Error("Failed to fetch instructor by ID");
       }
     },
-    thoughts: async () => {
-      return Thought.find().sort({ createdAt: -1 });
+    courseById: async (parent, { courseId }, context) => {
+      try {
+        const course = await Course.findById(courseId);
+        return course;
+      } catch (error) {
+        console.error("Error fetching course by ID:", error);
+        throw new Error("Failed to fetch course by ID");
+      }
     },
-    //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
-    user: async (parent, args, context) => {
+      user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id)
-        .populate({
-          // REFACTOR FOR CURRENT CODE
-          path: 'orders.products',
-          populate: 'category',
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
+           return user;
       }
 
       throw AuthenticationError;
@@ -92,9 +84,13 @@ const resolvers = {
     // },
   },
   Mutation: {
-    addUser: async(parent, args) => {
-      return await User.create(args)
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
     },
+
     addInstructor: async (parent, args) => {
       return await Instructor.create(args);
     },
@@ -171,16 +167,23 @@ const resolvers = {
     },
 
     // Add and remove thoughts to courses //
-    addThoughtToCourse: async (parent, {id, thoughtId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$push: {thoughts: {_id: thoughtId}}},
-        {new: true}
+    addThoughtToCourse: async (parent, { courseId, thoughtText, thoughtAuthor }) => {
+      return Course.findOneAndUpdate(
+        { _id: courseId },
+        {
+          $addToSet: { thoughts: { thoughtText, thoughtAuthor } },
+        },
+        {
+          new: true,
+        }
       );
     },
-    removeThoughtFromCourse: async (parent, {id, thoughtId}) => {
-      return await Course.findOneAndUpdate({_id: id},
-        {$pull: {thoughts: {_id: thoughtId}}},
-        {new: true}
+
+    removeThoughtFromCourse: async (parent, { courseId, thoughtId }) => {
+      return Course.findOneAndUpdate(
+        { _id: courseId },
+        { $pull: { thoughts: { _id: thoughtId } } },
+        { new: true }
       );
     },
     addUser: async (parent, args) => {
@@ -211,12 +214,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      return await Product.findByIdAndUpdate(
-        {_id: id},
-        { new: true }
-      );
-    },
+ 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

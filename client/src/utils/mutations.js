@@ -51,16 +51,29 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!, $thoughtAuthor: String!) {
-    addThought(thoughtText: $thoughtText, thoughtAuthor: $thoughtAuthor) {
+mutation AddThoughtToCourse($courseId: ID!, $thoughtText: String!, $thoughtAuthor: String!) {
+  addThoughtToCourse(courseId: $courseId, thoughtText: $thoughtText, thoughtAuthor: $thoughtAuthor) {
+    _id
+    title
+    thoughts {
+      _id
+      thoughtAuthor
+      thoughtText
+    }
+  }
+}
+`;
+
+export const DELETE_THOUGHT = gql`
+mutation RemoveThoughtFromCourse($courseId: ID!, $thoughtId: ID!) {
+  removeThoughtFromCourse(courseId: $courseId, thoughtId: $thoughtId) {
+    _id
+    title
+    thoughts {
       _id
       thoughtText
       thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
     }
   }
+}
 `;
