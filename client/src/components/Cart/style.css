@@ -1,57 +1,80 @@
 .cart {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 52px;
+  right: 10px;
   min-width: 20%;
   max-width: 30%;
   max-height: 60%;
-  background-color: var(--light);
+  background-color: #3ba5e0;
+  color: black;
   overflow: auto;
   padding: .5rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
-  border-bottom-left-radius: .5rem;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
 }
 
 .cart h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid var(--dark);
-  padding-bottom: .5rem;
-  margin: 1rem 0;
+  font-size: 30px;
+  padding-bottom: 10px;
+  margin: 0 25px 0 25px;
+}
+
+.border {
+  border-bottom: dashed black ;
+  position: relative;
+  top: -10px;
+}
+
+.cart h3 {
+  font-size: 20px;
 }
 
 .cart .close {
   position: absolute;
   top: .5rem;
-  right: .5rem;
+  right: 15px;
   cursor: pointer;
-  color: var(--tertiary);
+  color: black;
 }
 
 .cart .close:hover {
-  text-decoration: underline;
+  color: red;
 }
 
 .cart-closed {
   position: fixed;
   bottom: 2%;
   right: 2%;
-  font-size: 2rem;
-  cursor: pointer;
-  background-color: var(--secondary);
-  border-radius: 50%;
-  padding: .25rem;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   z-index: 9999;
+  cursor: pointer;
 }
 
 .cart-closed:hover {
-  transform: rotate(8deg);
+  transform: scale(1.2);
+}
+.cart-closed span{
+  cursor: pointer;
+}
+.cart-footer {
+  flex-direction: column;
+  display: flex;
+}
+.cart .delete-item {
+  cursor: pointer;
+}
+.cart-items {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
 }
 
 .cart img {
   width: 70px;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 .cart input {

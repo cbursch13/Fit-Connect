@@ -19,14 +19,6 @@
   width: 600px;
 }
 
-.home-container {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .home-container h4 {
  position: relative;
  top: -40px;
