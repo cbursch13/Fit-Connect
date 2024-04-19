@@ -57,8 +57,7 @@ function TitlebarImageList({instructors}) {
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
-            <p>{instructor.firstName}</p>
-            
+                        
             <ImageListItemBar
               title={instructor.firstName}
               subtitle={instructor.lastName}
