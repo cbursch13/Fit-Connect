@@ -1,4 +1,4 @@
-const { User, Instructor, Course } = require('../models');
+const { User, Instructor, Course, Thought} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -31,21 +31,12 @@ const resolvers = {
         throw new Error("Failed to fetch course by ID");
       }
     },
-    //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id)
-    //     .populate({
-    //       // REFACTOR FOR CURRENT CODE
-    //       path: 'orders.products',
-    //       populate: 'category',
-    //     });
-
-    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-    //     return user;
-    //   }
-
+      user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id)
+           return user;
+      }
+    },
     //   throw AuthenticationError;
     // },
     // order: async (parent, { _id }, context) => {
@@ -93,9 +84,13 @@ const resolvers = {
     // },
   },
   Mutation: {
-    addUser: async(parent, args) => {
-      return await User.create(args)
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
     },
+
     addInstructor: async (parent, args) => {
       return await Instructor.create(args);
     },
@@ -219,6 +214,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+ 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -236,7 +232,7 @@ const resolvers = {
 
       return { token, user };
     },
-  }
+    }
 };
 
 module.exports = resolvers;
