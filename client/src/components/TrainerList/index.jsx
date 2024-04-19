@@ -41,7 +41,7 @@ export default function CenteredTitlebarImageList() {
 function TitlebarImageList({instructors}) {
   console.log(instructors);
   return (
-    <ImageList sx={{ width: '100%', maxWidth: 1000, maxHeight: 600 }}>
+    <ImageList className= "card-background" sx={{ width: '100%', maxWidth: 1000, maxHeight: 600 }}>
       <ImageListItem key="Subheader" cols={2}>
         <ListSubheader sx={{ fontSize: '24px', color: '#339CFF', background: '#d3d3d3' }} component="div">MEET YOUR TRAINERS:</ListSubheader>
       </ImageListItem>

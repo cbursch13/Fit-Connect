@@ -85,6 +85,12 @@ nav {
   padding: 2em;
 }
 
+.card-background{
+  background-color: rgb(16, 23, 26);
+  border-radius: 10px;
+}
+
+
 .read-the-docs {
   color: white;
 } 

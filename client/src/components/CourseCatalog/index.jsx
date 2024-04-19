@@ -23,7 +23,7 @@ function CourseCatalog() {
     <div className="my-2" style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2>Our Classes:</h2>
       {state.products.length ? (
-        <div className="flex-row" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div className="flex-row card-background" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
           {state.products.map((course) => (
             <CourseItem
               key={course._id}
