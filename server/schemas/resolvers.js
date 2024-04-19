@@ -31,19 +31,10 @@ const resolvers = {
         throw new Error("Failed to fetch course by ID");
       }
     },
-    //!!!!!!!!!!!!!! OLD CODE  NEEDS TO BE REFORMATTED!!!!!!!!!!
-    user: async (parent, args, context) => {
+      user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id)
-        .populate({
-          // REFACTOR FOR CURRENT CODE
-          path: 'orders.products',
-          populate: 'category',
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
+           return user;
       }
 
       throw AuthenticationError;
@@ -93,9 +84,13 @@ const resolvers = {
     // },
   },
   Mutation: {
-    addUser: async(parent, args) => {
-      return await User.create(args)
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
     },
+
     addInstructor: async (parent, args) => {
       return await Instructor.create(args);
     },
@@ -219,12 +214,7 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      return await Product.findByIdAndUpdate(
-        {_id: id},
-        { new: true }
-      );
-    },
+ 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

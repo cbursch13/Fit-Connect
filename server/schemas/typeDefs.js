@@ -41,6 +41,7 @@ type Query {
   instructors: [Instructor]
   courses: [Course]
   users: [User]
+  user: User
 }
 
   type Mutation {
@@ -52,7 +53,7 @@ type Query {
     password: String!
     instructors: [ID]
     courses: [ID]  
-  ): User
+  ): Auth
 
   addInstructor(
     firstName: String!
