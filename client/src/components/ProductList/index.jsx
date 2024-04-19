@@ -39,7 +39,7 @@ function ProductList() {
   const courses = state.products.filter(course => course.instructor._id === instructorID);
   console.log(courses);
   return (
-    <div className="my-2">
+    <div className="product-list-container">
       <h2>{headerText}</h2>
       {courses.length ? (
         <div className="products-container">
