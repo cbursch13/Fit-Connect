@@ -3,7 +3,7 @@ import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_COURSES,} from '../../utils/queries';
+import { QUERY_ALL_COURSES } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useParams } from 'react-router-dom';
 
@@ -23,14 +23,15 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
-  console.log(state.products);
-  const courses = state.products.filter(course => course.instructor._id === instructorID);
-  console.log(courses);
+  const courses = state.products.filter(
+    (course) => course.instructor._id === instructorID
+  );
+
   return (
-    <div className="my-2">
+    <div className="product-list-container">
       <h2>Our Classes:</h2>
       {courses.length ? (
-        <div className="flex-row">
+        <div className="products-container">
           {courses.map((course) => (
             <ProductItem
               key={course._id}
