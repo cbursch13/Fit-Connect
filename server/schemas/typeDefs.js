@@ -146,6 +146,7 @@ type Query {
 
   addThoughtToCourse(courseId: ID!, thoughtText: String!, thoughtAuthor: String!): Course
   removeThoughtFromCourse(courseId: ID!, thoughtId: ID!): Course
+  updateThoughtInCourse(courseId: ID!, thoughtId: ID!, updatedThought: String!): Course
 }
 
 type Thought {
