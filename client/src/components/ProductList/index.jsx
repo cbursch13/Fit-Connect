@@ -23,13 +23,24 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
-  const courses = state.products.filter(
-    (course) => course.instructor._id === instructorID
-  );
+  let headerText = "";
+  let instructorName = "";
+  if (state.products.length > 0) {
+    const instructor = state.products.find(course => course.instructor._id === instructorID);
+    if (instructor) {
+      instructorName = instructor.instructor.firstName;
+    }
+  }
+  if (instructorName !== "") {
+    headerText = `${instructorName}'s Classes`;
+  }
 
+  console.log(state.products);
+  const courses = state.products.filter(course => course.instructor._id === instructorID);
+  console.log(courses);
   return (
     <div className="product-list-container">
-      <h2>Our Classes:</h2>
+      <h2>{headerText}</h2>
       {courses.length ? (
         <div className="products-container">
           {courses.map((course) => (
