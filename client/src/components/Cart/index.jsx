@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
@@ -8,6 +9,7 @@ import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './style.css';
+import cartImg from './../../assets/cart.png'
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -57,9 +59,7 @@ const Cart = () => {
   if (!state.cartOpen) {
     return (
       <div className="cart-closed" onClick={toggleCart}>
-        <span role="img" aria-label="trash">
-          🛒
-        </span>
+        <img src={cartImg} alt="" />
       </div>
     );
   }
@@ -67,22 +67,26 @@ const Cart = () => {
   return (
     <div className="cart">
       <div className="close" onClick={toggleCart}>
-        [close]
+        ✖
       </div>
       <h2>Shopping Cart</h2>
+      <div className='border'></div>
       {state.cart.length ? (
         <div>
-          {state.cart.map((item) => (
-            <CartItem key={item._id} item={item} />
-          ))}
+          <div className='cart-items'>
+            {state.cart.map((item) => (
+              <CartItem key={item._id} item={item} />
+            ))}
+          </div>
+          
 
-          <div className="flex-row space-between">
+          <div className="cart-footer">
             <strong>Total: ${calculateTotal()}</strong>
 
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-              <span>(log in to check out)</span>
+              <span><Link to="/login">Log in to check out</Link></span>
             )}
           </div>
         </div>

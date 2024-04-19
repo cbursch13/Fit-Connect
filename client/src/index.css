@@ -9,6 +9,11 @@
   --spacing-two: calc(1rem);
 }
 
+.home-container {
+  width: 100%;
+  height: 95vh;
+}
+
 * {
   box-sizing: border-box;
 }
