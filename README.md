@@ -144,7 +144,14 @@ OR
 
 ## Usage
 
-![React Portfolio](./public/assets/images/README/HomePage.png)
+![Fit Connect](./client/public/images/signup.png)
+![Fit Connect](./client/public/images/home.png)
+![Fit Connect](./client/public/images/about.png)
+![Fit Connect](./client/public/images/trainers.png)
+![Fit Connect](./client/public/images/trainer.png)
+![Fit Connect](./client/public/images/class.png)
+![Fit Connect](./client/public/images/classes.png)
+![Fit Connect](./client/public/images/cart.png)
 
 ## Links
 [The URL to Render](https://fit-connect.onrender.com)
