@@ -52,6 +52,7 @@ function Signup(props) {
               value={formState.firstName}
               onChange={handleChange}
               InputProps={{ style: { backgroundColor: 'white' } }}
+              variant="filled"
             />
           </Grid>
           <Grid item xs={6}>
@@ -62,6 +63,7 @@ function Signup(props) {
               value={formState.lastName}
               onChange={handleChange}
               InputProps={{ style: { backgroundColor: 'white' } }}
+              variant="filled"
             />
           </Grid>
           <Grid item xs={12}>
@@ -73,6 +75,7 @@ function Signup(props) {
               value={formState.email}
               onChange={handleChange}
               InputProps={{ style: { backgroundColor: 'white' } }}
+              variant="filled"
             />
           </Grid>
           <Grid item xs={12}>
@@ -84,6 +87,7 @@ function Signup(props) {
               value={formState.password}
               onChange={handleChange}
               InputProps={{ style: { backgroundColor: 'white' } }}
+              variant="filled"
             />
           </Grid>
         </Grid>
