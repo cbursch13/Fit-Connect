@@ -9,7 +9,7 @@ function ProductItem(item) {
   const {
     name,
     _id,
-    price
+    price,
   } = item;
 
   const { cart } = state
@@ -42,6 +42,7 @@ function ProductItem(item) {
   }
 
   return (
+    <div className="course-container">
     <div className="card px-1 py-1">
       <Link to={`/courses/${_id}`} className="card-link">
         <p>{name}</p>
@@ -49,7 +50,8 @@ function ProductItem(item) {
       <div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button style={{marginTop: '20px'}} onClick={addToCart}>Add to cart</button>
+    </div>
     </div>
   );
 }

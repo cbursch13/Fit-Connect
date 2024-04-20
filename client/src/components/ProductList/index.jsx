@@ -32,7 +32,7 @@ function ProductList() {
     }
   }
   if (instructorName !== "") {
-    headerText = `${instructorName}'s Classes`;
+    headerText = `${instructorName}'s Courses`;
   }
 
   console.log(state.products);
@@ -40,7 +40,7 @@ function ProductList() {
   console.log(courses);
   return (
     <div className="product-list-container">
-      <h2>{headerText}</h2>
+      <h2 style={{marginTop: "50px"}}>{headerText}</h2>
       {courses.length ? (
         <div className="products-container">
           {courses.map((course) => (
