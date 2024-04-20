@@ -1,4 +1,10 @@
+// Create the typeDefs
+// Type for User/Course/Instructor/Thought and Auth
+// Query for Users/Courses/Instructors and CourseByID/InstructorByID
+// Mutations for AddUser/Login and Add/Remove/Update thought from course
+
 const typeDefs = `
+
 type User {
   _id: ID
   firstName: String
@@ -30,6 +36,12 @@ type Instructor {
   clients: [User]
 }
 
+type Thought {
+  _id: ID
+  thoughtText: String
+  thoughtAuthor: String
+}
+
 type Auth {
     token: ID
     user: User
@@ -44,7 +56,7 @@ type Query {
   user: User
 }
 
-  type Mutation {
+type Mutation {
 
    addUser(
     firstName: String!
@@ -55,104 +67,27 @@ type Query {
     courses: [ID]  
   ): Auth
 
-  addInstructor(
-    firstName: String!
-    lastName: String!
-    image: String
-    bio: String
-    courses: [ID]
-    clients: [ID]
-  ): Instructor
-
-  addCourse(
-    title: String!
-    schedule: String
-    price: Int
-    description: String
-    instructor: [ID]
-    clients: [ID]
-  ): Course
-  
-  updateUser(
-    id: ID
-    firstName: String
-    lastName: String
-    email: String
-    password: String 
-  ): User
-
-  updateInstructor(
-    id: ID
-    firstName: String
-    lastName: String
-    image: String
-    bio: String
-  ): Instructor
-
-  updateCourse(
-    id: ID
-    title: String
-    schedule: String
-    price: Int
-    description: String
-  ): Course
-
    login(
     email: String!, 
     password: String!
   ):Auth
 
-  addClientToInstructor(
-    id: ID
-    clientId: ID
-  ): Instructor
-
-  removeClientFromInstructor(
-    id: ID
-    clientId: ID
-  ): Instructor
-
-  addClientToCourse(
-    id: ID
-    clientId: ID
+  addThoughtToCourse(
+    courseId: ID!,
+    thoughtText: String!,
+    thoughtAuthor: String!
   ): Course
 
-  removeClientFromCourse(
-    id: ID
-    clientId: ID
+  removeThoughtFromCourse(
+    courseId: ID!,
+    thoughtId: ID!
   ): Course
 
-  # Add and remove courses
-
-  addCourseToInstructor(
-    id: ID
-    courseId: ID
-  ): Instructor
-
-  removeCourseFromInstructor(
-    id: ID
-    courseId: ID
-  ): Instructor
-
-  addCourseToClient(
-    id: ID
-    courseId: ID
-  ): User
-
-  removeCourseFromClient(
-    id: ID
-    courseId: ID
-  ): User
-
-  addThoughtToCourse(courseId: ID!, thoughtText: String!, thoughtAuthor: String!): Course
-  removeThoughtFromCourse(courseId: ID!, thoughtId: ID!): Course
-  updateThoughtInCourse(courseId: ID!, thoughtId: ID!, updatedThought: String!): Course
-}
-
-type Thought {
-  _id: ID
-  thoughtText: String
-  thoughtAuthor: String
+  updateThoughtInCourse(
+    courseId: ID!,
+    thoughtId: ID!,
+    updatedThought: String!
+  ): Course
 }
 `;
 

@@ -1,9 +1,13 @@
+// Import GraphQL for errors and JWT to create token
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
 
+// Define a secret key and expiration time
 const secret = 'vewwwy secwet';
 const expiration = '2h';
 
+// Export Middleware function that checks and verifies JWT tokens
+// Also signs new JWT with user specific data for authentication 
 module.exports = {
   AuthenticationError: new GraphQLError('Could not authenticate user.', {
     extensions: {
