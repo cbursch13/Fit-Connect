@@ -14,6 +14,7 @@ import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
 import ThoughtSection from '../components/ThoughtSection';
 
+
 function CourseDetail() {
   const [state, dispatch] = useStoreContext();
   const { courseID } = useParams();
@@ -76,7 +77,8 @@ function CourseDetail() {
   return (
     <>
       {currentCourse && cart ? (
-        <div className="container detail-container card">
+        <div className='single-course'>
+        <div className="container detail-container card" style={{width: '40%'}}>
           <Link to="/courses" className="back-link">View All Courses</Link>
 
           <h1>{currentCourse.title}</h1>
@@ -101,6 +103,7 @@ function CourseDetail() {
               Remove from Cart
             </button>
           </p>
+        </div>
         </div>
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}

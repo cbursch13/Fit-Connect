@@ -47,24 +47,21 @@
     justify-content: space-between;
 }
 
+.single-course {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
 .card {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 100px;
-  width: 300px; 
-  background-color: black;
-}
-
-.thought {
-  width: 300px;
-    margin-right: 20px; 
-    margin-bottom: 20px; 
-}
-
-.thought-section {
-  display: flex;
-  flex-wrap: wrap; 
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  width: 200px; /* Adjust width as needed */
+  background-color: rgb(16, 23, 26);
 }
 
 .card-link {
@@ -136,6 +133,12 @@ nav {
 .card {
   padding: 2em;
 }
+
+.card-background{
+  background-color: rgb(16, 23, 26);
+  border-radius: 10px;
+}
+
 
 .read-the-docs {
   color: white;
