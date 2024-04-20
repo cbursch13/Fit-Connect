@@ -43,6 +43,7 @@ const ThoughtSection = (course) => {
                     </div>
                     <div className="comment-body">
                         <p>{thought.thoughtText}</p>
+                        <h5 style={{float:'left'}}>Edit:</h5>
                         <input 
                             type="text" 
                             defaultValue={thought.thoughtText} 
