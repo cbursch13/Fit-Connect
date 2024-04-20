@@ -1,7 +1,11 @@
+// Import models and tokens (authenticate)
 const { User, Instructor, Course } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
+// Create custom resolvers for front-end display
+// Query instructors/courses/users/user and instructorById/courseById
+// Mutations for login, adding user and adding/removing/updating thoughts
 const resolvers = {
   Query: {
     instructors: async () => {
@@ -38,87 +42,25 @@ const resolvers = {
       }
     },
   },
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
 
-    addInstructor: async (parent, args) => {
-      return await Instructor.create(args);
-    },
-    addCourse: async (parent, args) => {
-      return await Course.create(args);
-    },
-    updateUser: async (parent, args, context) => {
-      console.log(args.id, args.firstName)
-      return await User.findOneAndUpdate({ _id: args.id },
-        args,
-        { new: true, }
-      )
-    },
-    updateInstructor: async (parent, args) => {
-      return await User.findOneAndUpdate(
-        args
-      )
-    },
-    updateCourse: async (parent, args, context) => {
-      console.log(args);
-      return await User.findOneAndUpdate(
-        args
-      )
-    },
-    // ADD AND REMOVE CLIENTS
-    addClientToInstructor: async (parent, { id, clientId }) => {
-      return await Instructor.findOneAndUpdate({ _id: id },
-        { $push: { clients: { _id: clientId } } },
-        { new: true }
-      );
-    },
-    removeClientFromInstructor: async (parent, { id, clientId }) => {
-      return await Instructor.findOneAndUpdate({ _id: id },
-        { $pull: { clients: { _id: clientId } } },
-        { new: true }
-      );
-    },
-    addClientToCourse: async (parent, { id, clientId }) => {
-      return await Course.findOneAndUpdate({ _id: id },
-        { $push: { clients: { _id: clientId } } },
-        { new: true }
-      );
-    },
-    removeClientFromCourse: async (parent, { id, clientId }) => {
-      return await Course.findOneAndUpdate({ _id: id },
-        { $pull: { clients: { _id: clientId } } },
-        { new: true }
-      );
-    },
-    // ADD AND REMOVE COURSE
-    addCourseToInstructor: async (parent, { id, courseId }) => {
-      return await Instructor.findOneAndUpdate({ _id: id },
-        { $push: { courses: { _id: courseId } } },
-        { new: true }
-      );
-    },
-    removeCourseFromInstructor: async (parent, { id, courseId }) => {
-      return await Instructor.findOneAndUpdate({ _id: id },
-        { $pull: { courses: { _id: courseId } } },
-        { new: true }
-      );
-    },
-    addCourseToClient: async (parent, { id, clientId }) => {
-      return await User.findOneAndUpdate({ _id: id },
-        { $push: { clients: { _id: clientId } } },
-        { new: true }
-      );
-    },
-    removeCourseFromClient: async (parent, { id, clientId }) => {
-      return await User.findOneAndUpdate({ _id: id },
-        { $pull: { clients: { _id: clientId } } },
-        { new: true }
-      );
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw AuthenticationError;
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
+      const token = signToken(user);
+      return { token, user };
     },
 
     // Add and remove thoughts to courses //
@@ -149,42 +91,8 @@ const resolvers = {
         { new: true }
       );
       return updatedCourse;
-  },
-
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-
-      return { token, user };
     },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
-      }
-
-      throw AuthenticationError;
-    },
-
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw AuthenticationError;
-      }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(user);
-
-      return { token, user };
-    },
-    }
+  }
 };
 
 module.exports = resolvers;

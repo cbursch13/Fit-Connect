@@ -1,3 +1,5 @@
+// Connects to MongoDB database
+// Cleans existing data and seeds new data
 const models = require('../models');
 const db = require('../config/connection');
 
