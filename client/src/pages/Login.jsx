@@ -44,6 +44,7 @@ function Login(props) {
             type="email"
             value={formState.email}
             onChange={handleChange}
+            variant="filled"
           />
         </div>
         <div style={{ marginBottom: '1rem', backgroundColor: 'white' }}>
@@ -53,6 +54,7 @@ function Login(props) {
             name="password"
             type="password"
             value={formState.password}
+            variant="filled"
             onChange={handleChange}
           />
         </div>
