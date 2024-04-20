@@ -1,121 +1,147 @@
+// Importing modules and models
 const db = require('./connection');
 const { User, Instructor, Course } = require('../models');
 const cleanDB = require('./cleanDB');
 
+// Establish database connection and clean existing data in database
 db.once('open', async () => {
   try {
     await cleanDB('Instructor', 'instructors');
     await cleanDB('User', 'users');
     await cleanDB('Course', 'courses');
 
+    // Seed instructors
     const instructors = await Instructor.insertMany([
-    {
-      firstName: 'Joseph',
-      lastName: 'Daniels',
-      image: 'trainer01.png',
-      bio: 'Joseph Daniels is a renowned trainer specializing in powerlifting and muscle building. Joseph\'s clients range from beginners looking to pack on muscle to seasoned powerlifters aiming to break personal records. If you\'re ready to take your strength and muscle gains to the next level, Joseph Daniels is the trainer for you.'
-    },
-    {
-      firstName: 'Stephanie',
-      lastName: 'McPherson',
-      image: 'trainer02.jpeg',
-      bio: 'Stephanie McPherson is a dynamic CrossFit specialist known for her passion for functional fitness and empowering coaching style. She works with athletes of all levels, from beginners taking their first steps into CrossFit to seasoned competitors aiming for podium finishes. If you\'re ready to embrace the CrossFit lifestyle and unlock your full potential, Stephanie McPherson is the coach you want by your side.'
-    },
-    {
-      firstName: 'Carla',
-      lastName: 'Perez',
-      image: 'trainer03.jpeg',
-      bio: 'Carla Perez is a passionate fitness instructor who specializes in aerobics. She designs each session to be a dynamic and engaging experience, combining high-energy music with easy-to-follow dance moves. If you\'re looking to shake up your fitness routine, improve your cardiovascular health, and have a blast while doing it, Carla\'s aerobics classes are the perfect fit.'
-    },
-    {
-      firstName: 'Lily',
-      lastName: 'Thompson',
-      image: 'trainer04.jpeg',
-      bio: 'Lily Evans Thompson, a young woman with a heart as bright as her powers. Growing up, she always had a fascination with light and its ability to bring warmth and joy to the world. Now, as a powerlighter, she channels that fascination into a force for good, using her abilities to illuminate the darkest of situations. With her cheerful demeanor and unwavering determination, Lily strives to make the world a brighter place for all.'
-    },
-    {
-      firstName: 'Max',
-      lastName: 'Smith',
-      image: 'trainer05.jpeg',
-      bio: 'Max Johnson Smith, a down-to-earth individual with an extraordinary gift. From a young age, Max discovered his ability to manipulate light, bending it to his will with ease. Though initially hesitant to embrace his powers, he now uses them to protect those in need. With a strong sense of justice and a quick wit, Max fights tirelessly against injustice, shining a light on corruption wherever it may hide.'
-    },
-    {
-      firstName: 'Emily',
-      lastName: 'Garcia',
-      image: 'trainer06.jpeg',
-      bio: 'Emily Rodriguez Garcia, a beacon of hope in a world filled with shadows. Raised in a close-knit community, Emily always felt a deep connection to those around her. Now, as a powerlighter, she channels that connection into her abilities, using them to bring light and warmth to those in need. With her compassionate nature and unwavering resolve, Emily stands as a symbol of hope, inspiring others to believe in the power of kindness and empathy.'
-    },
-  ]);
+      {
+        firstName: 'Joseph',
+        lastName: 'Daniels',
+        image: 'trainer01.png',
+        bio: 'Joseph Daniels is a renowned trainer specializing in powerlifting and muscle building. Joseph\'s clients range from beginners looking to pack on muscle to seasoned powerlifters aiming to break personal records. If you\'re ready to take your strength and muscle gains to the next level, Joseph Daniels is the trainer for you.'
+      },
+      {
+        firstName: 'Stephanie',
+        lastName: 'McPherson',
+        image: 'trainer02.jpeg',
+        bio: 'Stephanie McPherson is a dynamic CrossFit specialist known for her passion for functional fitness and empowering coaching style. She works with athletes of all levels, from beginners taking their first steps into CrossFit to seasoned competitors aiming for podium finishes. If you\'re ready to embrace the CrossFit lifestyle and unlock your full potential, Stephanie McPherson is the coach you want by your side.'
+      },
+      {
+        firstName: 'Carla',
+        lastName: 'Perez',
+        image: 'trainer03.jpeg',
+        bio: 'Carla Perez is a passionate fitness instructor who specializes in aerobics. She designs each session to be a dynamic and engaging experience, combining high-energy music with easy-to-follow dance moves. If you\'re looking to shake up your fitness routine, improve your cardiovascular health, and have a blast while doing it, Carla\'s aerobics classes are the perfect fit.'
+      },
+      {
+        firstName: 'Lily',
+        lastName: 'Thompson',
+        image: 'trainer04.jpeg',
+        bio: 'Lily Evans Thompson, a young woman with a heart as bright as her powers. Growing up, she always had a fascination with light and its ability to bring warmth and joy to the world. Now, as a powerlighter, she channels that fascination into a force for good, using her abilities to illuminate the darkest of situations. With her cheerful demeanor and unwavering determination, Lily strives to make the world a brighter place for all.'
+      },
+      {
+        firstName: 'Max',
+        lastName: 'Smith',
+        image: 'trainer05.jpeg',
+        bio: 'Max Johnson Smith, a down-to-earth individual with an extraordinary gift. From a young age, Max discovered his ability to manipulate light, bending it to his will with ease. Though initially hesitant to embrace his powers, he now uses them to protect those in need. With a strong sense of justice and a quick wit, Max fights tirelessly against injustice, shining a light on corruption wherever it may hide.'
+      },
+      {
+        firstName: 'Emily',
+        lastName: 'Garcia',
+        image: 'trainer06.jpeg',
+        bio: 'Emily Rodriguez Garcia, a beacon of hope in a world filled with shadows. Raised in a close-knit community, Emily always felt a deep connection to those around her. Now, as a powerlighter, she channels that connection into her abilities, using them to bring light and warmth to those in need. With her compassionate nature and unwavering resolve, Emily stands as a symbol of hope, inspiring others to believe in the power of kindness and empathy.'
+      },
+    ]);
 
-  console.log(`${instructors.length} instructors seeded`);
+    console.log(`${instructors.length} instructors seeded`);
 
-  const instructorIds = instructors.map(instructor => instructor._id);
+    // Extract IDs from seeded instructors
+    const instructorIds = instructors.map(instructor => instructor._id);
 
-  const courses = await Course.insertMany([
-    {
-      title: "Weightlifting Technique",
-      schedule: "1 hour",
-      price: "80",
-      description: "Focuses on proper form, technique, and mechanics to build strong foundation",
-      thoughts: [
-      { thoughtText: "This is awesome", thoughtAuthor: "Anonymous" },
-      { thoughtText: "This is bad", thoughtAuthor: "Anonymous" }
-      ],
-      instructor: instructorIds[0],
-     clients: []
-    },
-    {
-      title: "Olympic Weightlifting",
-      schedule: "1 hour",
-      price: "100",
-      description: "Specifically geared towards learning the two Olympic lifts: the snatch and the clean and jerk. ",
-      thoughts: [{ thoughtText: "This is fun", thoughtAuthor: "Anonymous" }],
-      instructor: instructorIds[0],
-      clients: []
-    },
-    {
-      title: "Personalized Program",
-      schedule: "1 hour",
-      price: "150",
-      description: "Offers clients the opportunity to work with the instructor to create a customized strength training program.",
-      thoughts: [],
-      instructor: instructorIds[0],
-      clients: []
-    },
-  ])
-  
-  console.log(`${courses.length} courses seeded`);
+    // Seed courses
+    // Add thoughts as an array and designate an instructor
+    const courses = await Course.insertMany([
+      {
+        title: "Weightlifting Technique",
+        schedule: "1 hour",
+        price: "80",
+        description: "Focuses on proper form, technique, and mechanics to build strong foundation",
+        thoughts: [
+          { thoughtText: "This is awesome", thoughtAuthor: "Anonymous" },
+          { thoughtText: "This is bad", thoughtAuthor: "Anonymous" }
+        ],
+        instructor: instructorIds[0],
+        clients: []
+      },
+      {
+        title: "Olympic Weightlifting",
+        schedule: "1 hour",
+        price: "100",
+        description: "Specifically geared towards learning the two Olympic lifts: the snatch and the clean and jerk. ",
+        thoughts: [{ thoughtText: "This is fun", thoughtAuthor: "Anonymous" }],
+        instructor: instructorIds[0],
+        clients: []
+      },
+      {
+        title: "Personalized Program",
+        schedule: "1 hour",
+        price: "150",
+        description: "Offers clients the opportunity to work with the instructor to create a customized strength training program.",
+        thoughts: [],
+        instructor: instructorIds[0],
+        clients: []
+      },
+      {
+        title: "Yoga Basics",
+        schedule: "45 minutes",
+        price: "100",
+        description: "Introduces fundamental yoga poses and breathing techniques, suitable for beginners.",
+        thoughts: [],
+        instructor: instructorIds[1],
+        clients: []
+      },
+      {
+        title: "High-Intensity Interval Training (HIIT)",
+        schedule: "30 minutes",
+        price: "120",
+        description: "A fast-paced workout alternating between short bursts of intense exercise and brief recovery periods.",
+        thoughts: [],
+        instructor: instructorIds[1],
+        clients: []
+      }
+    ])
 
-  for (const id of instructorIds) {
-    const instructorCourses = courses.filter(course => course.instructor.equals(id));
-    const courseIds = instructorCourses.map(course => course._id);
-    await Instructor.findOneAndUpdate(
-      { _id: id },
-      { $set: { courses: courseIds } },
-      { new: true }
-    );
-  }
+    console.log(`${courses.length} courses seeded`);
 
-  await User.insertMany([
-    {
-      firstName: 'Pamela',
-      lastName: 'Washington',
-      email: 'pamela@testmail.com',
-      password: 'password12345'
-    },
-    {
-      firstName: 'Elijah',
-      lastName: 'Holt',
-      email: 'eholt@testmail.com',
-      password: 'password12345'
+    // Update instructor with associated course IDs
+    for (const id of instructorIds) {
+      const instructorCourses = courses.filter(course => course.instructor.equals(id));
+      const courseIds = instructorCourses.map(course => course._id);
+      await Instructor.findOneAndUpdate(
+        { _id: id },
+        { $set: { courses: courseIds } },
+        { new: true }
+      );
     }
-  ]);
 
-  console.log('Users seeded');
+    // Seed users
+    await User.insertMany([
+      {
+        firstName: 'Pamela',
+        lastName: 'Washington',
+        email: 'pamela@testmail.com',
+        password: 'password12345'
+      },
+      {
+        firstName: 'Elijah',
+        lastName: 'Holt',
+        email: 'eholt@testmail.com',
+        password: 'password12345'
+      }
+    ]);
 
-  process.exit();
-} catch (error) {
-  console.error('Seed script encountered an error:', error);
-  process.exit(1);
-}
+    console.log('Users seeded');
+
+    process.exit();
+  } catch (error) {
+    console.error('Seed script encountered an error:', error);
+    process.exit(1);
+  }
 });

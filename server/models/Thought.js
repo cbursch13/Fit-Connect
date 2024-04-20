@@ -1,3 +1,4 @@
+// Change Thought Model to just a schema that sits in Course Model
 const { Schema } = require('mongoose');
 
 const thoughtSchema = new Schema({

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { DELETE_THOUGHT, UPDATE_THOUGHT } from '../../utils/mutations';
-import './style.css';
-
 
 const ThoughtSection = (course) => {
     console.log(course);
@@ -32,28 +30,20 @@ const ThoughtSection = (course) => {
         }
     };
 
-    return (
-        <div className="comment-section">
-            <h1>Comments:</h1>
-            {thoughts.map((thought) => (
-                <div className="comment" key={thought._id}>
-                    <div className="comment-header">
-                        <h2>Posted by: {thought.thoughtAuthor}</h2>
-                        <button className="delete-button" onClick={() => handleDelete(thought._id)}>Delete</button>
-                    </div>
-                    <div className="comment-body">
-                        <p>{thought.thoughtText}</p>
-                        <h5 style={{float:'left'}}>Edit:</h5>
-                        <input 
-                            type="text" 
-                            defaultValue={thought.thoughtText} 
-                            onChange={(e) => setUpdatedThought(e.target.value)} 
-                            className="update-input" 
-                        />
-                        <button onClick={() => handleUpdate(thought._id, updatedThought)} className="update-button">Update</button>
-                    </div>
-                </div>
-            ))}
+return (
+        <div className="thought-section">
+            <div>
+                <h1>Reviews: </h1>
+                {thoughts.map((thought) => (
+                    <React.Fragment key={thought._id}>
+                        <h2 style={{ display: 'inline-block' }}>{thought.thoughtText} - {thought.thoughtAuthor}</h2>
+                        <button onClick={() => handleDelete(thought._id)} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white'  }}>Delete</button>
+                        <input type="text" defaultValue={thought.thoughtText} onChange={(e) => setUpdatedThought(e.target.value)} />
+                        <button onClick={() => handleUpdate(thought._id, updatedThought)}>Update</button>
+                        <br />
+                    </React.Fragment>
+                ))}
+            </div>
         </div>
     );
 };
