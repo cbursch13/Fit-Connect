@@ -28,7 +28,7 @@ function CourseCatalog() {
             <CourseItem
               key={course._id}
               _id={course._id}
-              name={course.title}
+              title={course.title}
               price={course.price}
               instructor={course.instructor}
               schedule={course.schedule}

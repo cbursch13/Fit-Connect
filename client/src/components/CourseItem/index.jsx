@@ -7,7 +7,7 @@ function CourseItem(item) {
   const [state, dispatch] = useStoreContext();
 
   const {
-    name,
+    title,
     _id,
     price,
     instructor,
@@ -41,7 +41,7 @@ function CourseItem(item) {
   return (
     <div className="card px-1 py-1">
       <Link to={`/courses/${_id}`}>
-        <h4>{name}</h4>
+        <h4>{title}</h4>
     </Link> 
         <p>Instructor: <Link to={`/trainers/${instructor._id}`}> {instructor.firstName} {instructor.lastName} </Link></p>
         <p>Duration: {schedule}</p>

@@ -7,9 +7,10 @@ function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
   console.log(state);
   const {
-    name,
+    title,
     _id,
     price,
+    schedule
   } = item;
 
   const { cart } = state
@@ -45,10 +46,11 @@ function ProductItem(item) {
     <div className="course-container">
     <div className="card px-1 py-1">
       <Link to={`/courses/${_id}`} className="card-link">
-        <p>{name}</p>
+        <p>{title}</p>
       </Link>
       <div>
-        <span>${price}</span>
+        <span>${price}</span> <br />
+        <span>{schedule}</span>
       </div>
       <button style={{marginTop: '20px'}} onClick={addToCart}>Add to cart</button>
     </div>
