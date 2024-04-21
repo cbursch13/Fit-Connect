@@ -34,6 +34,7 @@ function CourseDetail() {
         idbPromise('products', 'put', product);
       });
       setCurrentCourse(course);
+      console.log(course);
     } else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({

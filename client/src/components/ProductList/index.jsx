@@ -47,7 +47,8 @@ function ProductList() {
             <ProductItem
               key={course._id}
               _id={course._id}
-              name={course.title}
+              title={course.title}
+              schedule={course.schedule}
               price={course.price}
             />
           ))}

@@ -34,19 +34,19 @@ db.once('open', async () => {
         firstName: 'Lily',
         lastName: 'Thompson',
         image: 'trainer04.jpeg',
-        bio: 'Lily Evans Thompson, a young woman with a heart as bright as her powers. Growing up, she always had a fascination with light and its ability to bring warmth and joy to the world. Now, as a powerlighter, she channels that fascination into a force for good, using her abilities to illuminate the darkest of situations. With her cheerful demeanor and unwavering determination, Lily strives to make the world a brighter place for all.'
+        bio: 'Lily Thompson is a certified Pilates instructor dedicated to helping others improve their strength, flexibility, and overall well-being through the practice of Pilates. With a background in dance and a passion for movement, Lily brings a unique blend of precision and fluidity to her classes.'
       },
       {
         firstName: 'Max',
         lastName: 'Smith',
         image: 'trainer05.jpeg',
-        bio: 'Max Johnson Smith, a down-to-earth individual with an extraordinary gift. From a young age, Max discovered his ability to manipulate light, bending it to his will with ease. Though initially hesitant to embrace his powers, he now uses them to protect those in need. With a strong sense of justice and a quick wit, Max fights tirelessly against injustice, shining a light on corruption wherever it may hide.'
+        bio: 'Max Smith is a boxing instructor with over a decade of experience in the sport. He offers courses for boxers of all levels and motivations, whether they are looking to learn boxing to get in shape, enhance their self-defense skills, or compete at an amateur level, he is dedicated to spreading his love for boxing.'
       },
       {
         firstName: 'Emily',
         lastName: 'Garcia',
         image: 'trainer06.jpeg',
-        bio: 'Emily Rodriguez Garcia, a beacon of hope in a world filled with shadows. Raised in a close-knit community, Emily always felt a deep connection to those around her. Now, as a powerlighter, she channels that connection into her abilities, using them to bring light and warmth to those in need. With her compassionate nature and unwavering resolve, Emily stands as a symbol of hope, inspiring others to believe in the power of kindness and empathy.'
+        bio: 'Emily Garcia is a fitness lifestyle coach specializing in holistic health and wellness. With a focus on personalized plans and compassionate support, she empowers clients to achieve lasting transformation in their physical fitness, nutrition, and mindset. '
       },
     ]);
 
@@ -80,10 +80,10 @@ db.once('open', async () => {
         clients: []
       },
       {
-        title: "Personalized Program",
+        title: "Personalized Program with Joseph",
         schedule: "1 hour",
         price: "150",
-        description: "Offers clients the opportunity to work with the instructor to create a customized strength training program.",
+        description: "Offers clients the opportunity to work with the instructor to develop a customized strength training program in order to meet their unique goals.",
         thoughts: [],
         instructor: instructorIds[0],
         clients: []
@@ -105,7 +105,79 @@ db.once('open', async () => {
         thoughts: [],
         instructor: instructorIds[1],
         clients: []
-      }
+      },
+      {
+        title: "Dance Aerobics",
+        schedule: "30 minutes",
+        price: "50",
+        description: "Get your groove on with dance-inspired aerobics classes. Combining energetic choreography with cardio routines, these classes offer a fun and rhythmic way to improve fitness levels while learning different dance styles such as hip-hop, salsa, or jazz.",
+        thoughts: [],
+        instructor: instructorIds[2],
+        clients: []
+      },
+      {
+        title: "Aerobic Kickboxing",
+        schedule: "45 minutes",
+        price: "70",
+        description: "Unleash your inner warrior with aerobic kickboxing classes. Blend martial arts-inspired moves with aerobic exercises to improve cardiovascular fitness, coordination, and strength. These high-energy workouts are sure to leave you feeling empowered and invigorated.",
+        thoughts: [],
+        instructor: instructorIds[2],
+        clients: []
+      },
+      {
+        title: "Boxing Fundamentals",
+        schedule: "60 minutes",
+        price: "100",
+        description: "Master the fundamental techniques and principles of boxing, including proper stance, footwork, punches (jab, cross, hook, uppercut), and defensive maneuvers (blocks, slips, rolls). Ideal for beginners looking to build a solid foundation in boxing skills and techniques.",
+        thoughts: [],
+        instructor: instructorIds[4],
+        clients: []
+      },
+      {
+        title: "Boxing for Self-Defense",
+        schedule: "60 minutes",
+        price: "80",
+        description: "Learn practical self-defense skills and strategies through boxing-based training. Focus on situational awareness, assertiveness, and effective striking techniques to protect yourself in real-life confrontations. Suitable for individuals of all fitness levels and backgrounds.",
+        thoughts: [],
+        instructor: instructorIds[4],
+        clients: []
+      },
+      {
+        title: "Pilates for Athletes",
+        schedule: "60 minutes",
+        price: "100",
+        description: "A specialized course catering to athletes and active individuals seeking to enhance performance, prevent injuries, and improve athletic conditioning through Pilates-based cross-training exercises tailored to specific sports and activities.",
+        thoughts: [],
+        instructor: instructorIds[3],
+        clients: []
+      },
+      {
+        title: "Intermediate Pilates Matwork",
+        schedule: "80 minutes",
+        price: "100",
+        description: "A progressive course building upon the fundamentals with more challenging Pilates exercises and sequences to enhance strength, flexibility, coordination, and body awareness.",
+        thoughts: [],
+        instructor: instructorIds[3],
+        clients: []
+      },
+      {
+        title: "Nutrition Essentials",
+        schedule: "60 minutes",
+        price: "95",
+        description: "A course focusing on understanding macronutrients, meal planning, mindful eating practices, and creating balanced and sustainable nutrition habits for long-term health and wellness.",
+        thoughts: [],
+        instructor: instructorIds[5],
+        clients: []
+      },
+      {
+        title: "Personalized Program with Emily",
+        schedule: "60 minutes",
+        price: "150",
+        description: "Customized one-on-one coaching programs tailored to each client's specific needs, goals, and preferences, providing personalized support, accountability, and guidance on their journey to a healthier, happier lifestyle.",
+        thoughts: [],
+        instructor: instructorIds[5],
+        clients: []
+      },
     ])
 
     console.log(`${courses.length} courses seeded`);
