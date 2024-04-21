@@ -1,3 +1,5 @@
+// Component for the Shopping Cart
+// Cart based on session and user that is logged in
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { loadStripe } from '@stripe/stripe-js';

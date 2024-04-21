@@ -1,3 +1,4 @@
+// Individual courses component on the Course List component used for individual trainer page 
 import { Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";

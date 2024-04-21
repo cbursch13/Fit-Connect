@@ -1,3 +1,7 @@
+// Pre-made helper functions for the website
+// Pluralize will add an "s" if courses are multiple
+// idbPromise interacts with IndexedDB for client-side storage in web browsers
+
 export function pluralize(name, count) {
   if (count === 1) {
     return name;
@@ -11,7 +15,6 @@ export function idbPromise(storeName, method, object) {
     let db, tx, store;
     request.onupgradeneeded = function(e) {
       const db = request.result;
-      db.createObjectStore('products', { keyPath: '_id' });
       db.createObjectStore('courses', { keyPath: '_id' });
       db.createObjectStore('cart', { keyPath: '_id' });
     };

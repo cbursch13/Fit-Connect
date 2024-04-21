@@ -1,3 +1,4 @@
+// Component for each individual item (or course) in the Shopping Cart
 import { useStoreContext } from "../../utils/GlobalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";

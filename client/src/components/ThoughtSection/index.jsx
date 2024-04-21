@@ -1,3 +1,5 @@
+// Component for the Thought section
+// Includes state and ability to do mutations (delete/update/add/read)
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { DELETE_THOUGHT, UPDATE_THOUGHT } from '../../utils/mutations';

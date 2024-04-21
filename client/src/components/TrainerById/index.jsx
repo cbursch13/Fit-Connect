@@ -1,3 +1,4 @@
+// Component for each individual (instructor) when you click on their page
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_INSTRUCTORS } from '../../utils/queries';
 import Card from '@mui/material/Card';

@@ -1,11 +1,12 @@
-import {
-  UPDATE_PRODUCTS,
+// Create reducer that manages the stage of the shopping cart in React
+// Adding, updating, removing, and clearing products in the cart
+// Toggle open/closed cart is a future technology
+  import {
+  UPDATE_COURSES,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
-  UPDATE_CATEGORIES,
-  UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
   UPDATE_INSTRUCTORS,
@@ -13,11 +14,13 @@ import {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case UPDATE_PRODUCTS:
+
+    case UPDATE_COURSES:
       return {
         ...state,
         products: [...action.products],
       };
+
     case UPDATE_INSTRUCTORS:
       return {
         ...state,
@@ -54,7 +57,6 @@ export const reducer = (state, action) => {
       let newState = state.cart.filter(product => {
         return product._id !== action._id;
       });
-
       return {
         ...state,
         cartOpen: newState.length > 0,
@@ -73,18 +75,6 @@ export const reducer = (state, action) => {
         ...state,
         cartOpen: !state.cartOpen
       };
-
-    case UPDATE_CATEGORIES:
-      return {
-        ...state,
-        categories: [...action.categories],
-      };
-
-    case UPDATE_CURRENT_CATEGORY:
-      return {
-        ...state,
-        currentCategory: action.currentCategory
-      }
 
     default:
       return state;

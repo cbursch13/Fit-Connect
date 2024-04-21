@@ -1,3 +1,4 @@
+// Page for Errors (i.e., page not loading or rendering)
 import Jumbotron from "../components/Jumbotron";
 
 const NoMatch = () => {

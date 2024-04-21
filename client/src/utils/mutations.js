@@ -1,3 +1,6 @@
+// Create mutations for CRUD functionality
+// Login/Adding Users and Add/Remove/Update thoughts
+
 import { gql } from '@apollo/client';
 
 export const LOGIN = gql`

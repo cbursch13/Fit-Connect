@@ -1,3 +1,4 @@
+// Provides global state management for a React application and a reducer for handling state changes
 import React, { createContext, useContext, useReducer } from "react";
 import { reducer } from './reducers'
 

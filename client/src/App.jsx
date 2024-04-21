@@ -1,3 +1,5 @@
+// Set up a React application with GraphQL through Apollo Client
+// Integrates a global state provider
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
@@ -5,8 +7,10 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 
+// Establishes main components: Nav, Cart and Footer
+// React Router will define routing through Outlet component
+import { setContext } from '@apollo/client/link/context';
 import Nav from './components/Nav';
 import Cart from './components/Cart'
 import Footer from './components/Footer';
@@ -16,6 +20,7 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
+//  Authorization link enables token-based authentication for GraphQL requests.
 console.log("authlink run")
 const authLink = setContext((_, { Nav }) => {
   const token = localStorage.getItem('id_token');

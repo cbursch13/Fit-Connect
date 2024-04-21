@@ -1,7 +1,9 @@
+// Component to list the courses for an individual Trainer (instructor) page
+// Filter and map through the courses to display on the page
 import { useEffect, useState } from 'react';
-import ProductItem from '../ProductItem';
+import TrainerCourseItem from '../TrainerCourseItem';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_COURSES } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_COURSES } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
@@ -17,7 +19,7 @@ function ProductList() {
   useEffect(() => {
     if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
+        type: UPDATE_COURSES,
         products: data.courses,
       });
     }
@@ -44,7 +46,7 @@ function ProductList() {
       {courses.length ? (
         <div className="products-container">
           {courses.map((course) => (
-            <ProductItem
+            <TrainerCourseItem
               key={course._id}
               _id={course._id}
               name={course.title}

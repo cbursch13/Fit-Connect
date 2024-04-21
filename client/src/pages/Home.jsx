@@ -1,3 +1,4 @@
+// Page for Home
 const Home = () => {
   return (
     <div className="home-container">

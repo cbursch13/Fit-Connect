@@ -1,3 +1,4 @@
+// Page About the website
 function About() {
   return (
     <div className="about-container">

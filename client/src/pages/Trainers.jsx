@@ -1,3 +1,4 @@
+// Page with a listing of all the trainers
 import TrainerList from "../components/TrainerList";
 
 const Trainers = () => {

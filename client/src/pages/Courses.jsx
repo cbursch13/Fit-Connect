@@ -1,3 +1,4 @@
+// Page for a listing of all courses
 import CourseCatalog from "../components/CourseCatalog";
 
 const Courses = () => {

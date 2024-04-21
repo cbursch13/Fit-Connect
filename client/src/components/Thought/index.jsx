@@ -1,3 +1,4 @@
+// Component for the added thoughts that render to page after thought is added via a click
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_THOUGHT } from '../../utils/mutations';

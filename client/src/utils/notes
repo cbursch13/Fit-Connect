@@ -1,0 +1,3 @@
+// Create reducer that manages the stage of the shopping cart in React
+// Adding, updating, removing, and clearing products in the cart
+// Toggle open/closed cart is a future technology

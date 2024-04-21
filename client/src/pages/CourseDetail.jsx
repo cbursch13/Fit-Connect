@@ -1,3 +1,5 @@
+// Page for individual course details
+// Includes a review box to add/update/delete "thoughts" or reviews about the course
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -7,7 +9,7 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
-  UPDATE_PRODUCTS,
+  UPDATE_COURSES,
 } from '../utils/actions';
 import { QUERY_ALL_COURSES } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
@@ -27,7 +29,7 @@ function CourseDetail() {
     if (data) {
       const course = data.courses.find((product) => product._id === courseID);
       dispatch({
-        type: UPDATE_PRODUCTS,
+        type: UPDATE_COURSES,
         products: data.courses,
       });
       data.courses.forEach((product) => {
@@ -37,7 +39,7 @@ function CourseDetail() {
     } else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({
-          type: UPDATE_PRODUCTS,
+          type: UPDATE_COURSES,
           products: indexedProducts,
         });
       });

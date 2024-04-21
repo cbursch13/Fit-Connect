@@ -1,3 +1,4 @@
+// Page not currently in use, but will be for future functionality of Stripe checkout
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import Jumbotron from '../components/Jumbotron';

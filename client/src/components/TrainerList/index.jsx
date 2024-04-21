@@ -1,8 +1,11 @@
+// Component for each trainer (instructor) on full trainer listing page
+// Mapped to display all seeded trainers
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import { QUERY_ALL_INSTRUCTORS } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_INSTRUCTORS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -10,7 +13,6 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
-import { UPDATE_INSTRUCTORS } from '../../utils/actions';
 
 export default function CenteredTitlebarImageList() {
   const { loading, error, data } = useQuery(QUERY_ALL_INSTRUCTORS);

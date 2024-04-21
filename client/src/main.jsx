@@ -1,3 +1,5 @@
+// Import ReactDOM and Router modules
+// Import and create paths for each page
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';

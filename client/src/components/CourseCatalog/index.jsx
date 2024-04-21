@@ -1,7 +1,8 @@
+// Component to map through all courses and display them as a listing (catalog) on the Courses page
 import React, { useEffect } from 'react';
 import CourseItem from '../CourseItem';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_COURSES } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_COURSES } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
@@ -13,7 +14,7 @@ function CourseCatalog() {
   useEffect(() => {
     if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
+        type: UPDATE_COURSES,
         products: data.courses,
       });
     }

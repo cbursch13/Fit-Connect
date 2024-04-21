@@ -1,3 +1,4 @@
+// Handles authentication related tasks for JSON Web Tokens (JWTs)
 import decode from 'jwt-decode';
 
 class AuthService {

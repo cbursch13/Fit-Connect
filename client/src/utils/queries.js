@@ -1,3 +1,7 @@
+// Queries created in GraphQL and used for Pages/Components
+// Query for all instructors/courses/users and single instructor/course
+// Query for checkout is a future functionality for Stripe checkout
+
 import { gql } from '@apollo/client';
 
 export const QUERY_ALL_INSTRUCTORS = gql`
@@ -84,50 +88,10 @@ export const QUERY_INSTRUCTOR_BY_ID = gql`
   }
 `;
 
-export const QUERY_PRODUCTS = gql`
-  query getProducts($category: ID) {
-    products(category: $category) {
-      _id
-      name
-      description
-      price
-      quantity
-      image
-      category {
-        _id
-      }
-    }
-  }
-`;
-
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ProductInput]) {
     checkout(products: $products) {
       session
-    }
-  }
-`;
-
-export const QUERY_ALL_PRODUCTS = gql`
-  {
-    products {
-      _id
-      name
-      description
-      price
-      quantity
-      category {
-        name
-      }
-    }
-  }
-`;
-
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
-      name
     }
   }
 `;
@@ -152,4 +116,3 @@ export const QUERY_USER = gql`
     }
   }
 `;
-
